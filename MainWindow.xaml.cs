@@ -19,7 +19,7 @@ namespace Zaverecny_Projekt
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine("Ahoj");
+            Console.WriteLine("Ahoj.");
         }
     }
 }
