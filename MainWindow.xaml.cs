@@ -20,6 +20,7 @@ namespace Zaverecny_Projekt
         {
             InitializeComponent();
             Console.WriteLine("Ahoj..");
+            //TEST COMMITU - ADAM
         }
     }
 }
