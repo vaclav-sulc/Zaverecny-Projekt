@@ -1,19 +1,24 @@
-﻿<Window x:Class="Zaverecny_Projekt.LoginWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Zaverecny_Projekt"
-        mc:Ignorable="d"
-        Title="ŽlabGrade" MinHeight="450" MinWidth="400" MaxHeight="450" MaxWidth="400">
+﻿<ui:FluentWindow x:Class="Zaverecny_Projekt.LoginWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 mc:Ignorable="d"
+                 Title="ŽlabGrade"
+                 Width="400" Height="450"
+                 ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+                 ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                 ResizeMode="NoResize">
+
     <Grid>
-        <Label Content="ŽlabGrade" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="40" FontWeight="Bold"/>
+        <ui:TitleBar x:Name="TitleBar" ShowMaximize="False"  />
+        <TextBlock Text="ŽlabGrade" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,30,0,0"/>
 
-        <Label x:Name="Warning_Label" Content="Zadán neplatný login nebo heslo!" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,135,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Background="Red" Foreground="White"/>
+        <ui:InfoBar x:Name="WarningBar" Title="Chyba přihlášení" Message="Zadané údaje nejsou správné!" Severity="Error" IsClosable="True" IsOpen="False" Margin="20,241,20,0" VerticalAlignment="Top" />
+        <ui:TextBox x:Name="LoginTextBox" PlaceholderText="Uživatelské jméno" Margin="20,126,20,0" VerticalAlignment="Top" />
+        <ui:PasswordBox x:Name="PasswordTextBox" PlaceholderText="Heslo" Margin="20,181,20,0" VerticalAlignment="Top" />
+        <ui:Button x:Name="LoginButton" Background="Purple" Foreground="White" Appearance="Primary" Content="Přihlásit se" Margin="0,329,0,0" VerticalAlignment="Top" Click="LoginButton_Click" HorizontalAlignment="Center"/>
 
-        <TextBox x:Name="Login_TextBox" HorizontalAlignment="Center" Margin="0,180,0,0" Text="Uživatelské jméno" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="30" FontSize="16" FontStyle="Italic" Foreground="Gray" GotFocus="Login_TextBox_GotFocus" LostFocus="Login_TextBox_LostFocus"/>
-        <TextBox x:Name="Password_TextBox" HorizontalAlignment="Center" Margin="0,220,0,0" Text="Heslo" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="30" FontSize="16" FontStyle="Italic" Foreground="Gray" GotFocus="Password_TextBox_GotFocus" LostFocus="Password_TextBox_LostFocus"/>
-
-        <Button x:Name="Login_Button" Content="Přihlásit se" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" Width="250" Height="35" FontSize="20" FontWeight="Bold" Background="Purple" Foreground="White" Click="Login_Button_Click"/>
     </Grid>
-</Window>
+</ui:FluentWindow>
