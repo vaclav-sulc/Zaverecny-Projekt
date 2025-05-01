@@ -1,7 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Media;
-using Wpf.Ui.Controls;
+﻿using System.Text;
+using System.Windows;
+using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
+using Wpf.Ui.Controls;
 
 namespace Zaverecny_Projekt
 {
@@ -11,8 +12,7 @@ namespace Zaverecny_Projekt
          * 
          *  Upravit hover effect u tlačítka "Login_Button"
          *  Přidat label varování zvlášt pro login a heslo
-         *  Šifrovat hesla v databázi
-         * 
+         *  
          */
 
         public LoginWindow()
@@ -31,7 +31,7 @@ namespace Zaverecny_Projekt
             {
                 mySqlConnection.Open();
 
-                string sqlQuery = $"SELECT * FROM zlabgrade WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{PasswordTextBox.Password}\"";
+                string sqlQuery = $"SELECT * FROM zlabgrade WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{GetStringSha256Hash(PasswordTextBox.Password)}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
                 
                 using MySqlDataReader dataReader = command.ExecuteReader();
@@ -44,6 +44,7 @@ namespace Zaverecny_Projekt
                     switch (dataReader["role"])
                     {
                         case "vedeni":
+                            this.Close();
                             break;
 
                         case "ucitel":
@@ -70,6 +71,19 @@ namespace Zaverecny_Projekt
             {
                 Console.WriteLine("ERROR: " + exception.Message);
             }
+        }
+
+        private static string GetStringSha256Hash(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return string.Empty;
+            }
+
+            byte[] buffer = Encoding.UTF8.GetBytes(text);
+            byte[] hash = SHA256.HashData(buffer);
+
+            return BitConverter.ToString(hash).Replace("-", string.Empty);
         }
     }
 }

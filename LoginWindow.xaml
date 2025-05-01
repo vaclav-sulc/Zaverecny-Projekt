@@ -10,7 +10,6 @@
                  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
                  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                  ResizeMode="NoResize">
-
     <Grid>
         <ui:TitleBar x:Name="TitleBar" ShowMaximize="False"  />
         <TextBlock Text="ŽlabGrade" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,30,0,0"/>
@@ -19,6 +18,5 @@
         <ui:TextBox x:Name="LoginTextBox" PlaceholderText="Uživatelské jméno" Margin="20,126,20,0" VerticalAlignment="Top" />
         <ui:PasswordBox x:Name="PasswordTextBox" PlaceholderText="Heslo" Margin="20,181,20,0" VerticalAlignment="Top" />
         <ui:Button x:Name="LoginButton" Background="Purple" Foreground="White" Appearance="Primary" Content="Přihlásit se" Margin="0,329,0,0" VerticalAlignment="Top" Click="LoginButton_Click" HorizontalAlignment="Center"/>
-
     </Grid>
 </ui:FluentWindow>
