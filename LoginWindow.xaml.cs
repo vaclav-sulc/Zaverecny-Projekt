@@ -11,6 +11,7 @@ namespace ZlabGrade
         /*                  TO DO LIST
          * 
          *  Upravit hover effect u tlačítka "Login_Button"
+         *  Upravit vzhled u text boxů "LoginTextBox" a "PasswordBox"
          *  Přidat label varování zvlášt pro login a heslo
          *  
          */
@@ -31,7 +32,7 @@ namespace ZlabGrade
             {
                 mySqlConnection.Open();
 
-                string sqlQuery = $"SELECT * FROM zlabgrade WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{GetStringSha256Hash(PasswordTextBox.Password)}\"";
+                string sqlQuery = $"SELECT * FROM zlabgrade WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{GetStringSha256Hash(PasswordBox.Password)}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
                 
                 using MySqlDataReader dataReader = command.ExecuteReader();
@@ -44,6 +45,7 @@ namespace ZlabGrade
                     switch (dataReader["role"])
                     {
                         case "vedeni":
+
                             this.Close();
                             break;
 

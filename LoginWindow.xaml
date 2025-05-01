@@ -6,17 +6,22 @@
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  mc:Ignorable="d"
                  Title="ŽlabGrade"
+                 SizeToContent="Manual"
+                 MinWidth="400"
                  Width="400" Height="450"
                  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
                  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                  ResizeMode="NoResize">
     <Grid>
-        <ui:TitleBar x:Name="TitleBar" ShowMaximize="False"  />
-        <TextBlock Text="ŽlabGrade" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,30,0,0"/>
+        <ui:TitleBar x:Name="TitleBar" ShowMaximize="False"/>
+        
+        <TextBlock Text="ŽlabGrade" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,50,0,0"/>
 
-        <ui:InfoBar x:Name="WarningBar" Title="Chyba přihlášení" Message="Zadané údaje nejsou správné!" Severity="Error" IsClosable="True" IsOpen="False" Margin="20,241,20,0" VerticalAlignment="Top" />
-        <ui:TextBox x:Name="LoginTextBox" PlaceholderText="Uživatelské jméno" Margin="20,126,20,0" VerticalAlignment="Top" />
-        <ui:PasswordBox x:Name="PasswordTextBox" PlaceholderText="Heslo" Margin="20,181,20,0" VerticalAlignment="Top" />
-        <ui:Button x:Name="LoginButton" Background="Purple" Foreground="White" Appearance="Primary" Content="Přihlásit se" Margin="0,329,0,0" VerticalAlignment="Top" Click="LoginButton_Click" HorizontalAlignment="Center"/>
+        <ui:TextBox x:Name="LoginTextBox" PlaceholderText="Uživatelské jméno" Margin="20,170,20,0" VerticalAlignment="Top"/>
+        <ui:PasswordBox x:Name="PasswordBox" PlaceholderText="Heslo" Margin="20,220,20,0" VerticalAlignment="Top"/>
+
+        <ui:InfoBar x:Name="WarningBar" Title="Chyba přihlášení" Message="Zadané údaje nejsou správné!" Severity="Error" IsClosable="False" IsOpen="False" Margin="20,275,20,0" VerticalAlignment="Top"/>
+
+        <ui:Button x:Name="LoginButton" Content="Přihlásit se" Appearance="Secondary" Margin="0,360,0,0" Width="300" Height="35" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Purple" Foreground="White" FontWeight="Bold" Click="LoginButton_Click"/>
     </Grid>
 </ui:FluentWindow>
