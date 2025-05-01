@@ -1,12 +1,14 @@
 # Přihlašovací údaje
 ## MySQL Databáze
-**Odkaz:** phpmyadmin.co/sql.php<br/>
+**[phpMyAdmin](phpmyadmin.co/sql.php)**
 
 **Server:** sql7.freesqldatabase.com<br/>
 **Username:** sql7776236<br/>
 **Password:** rakYbIVDef
 
 ## Uživatelé
-- Login: vedeni | Heslo: vedeni123
-- Login: ucitel | Heslo: ucitel123
-- Login: student | Heslo: student123
+| Username | Heslo |
+| --- | --- |
+| vedeni | vedeni123 |
+| ucitel | ucitel123 |
+| student | student123 |
