@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
 using Wpf.Ui.Controls;
 
-namespace Zaverecny_Projekt
+namespace ZlabGrade
 {
     public partial class LoginWindow : FluentWindow
     {
