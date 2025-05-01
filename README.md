@@ -8,5 +8,5 @@
 
 ## Uživatelé
 - Login: vedeni | Heslo: vedeni123
-- Login: ucitel| Heslo: ucitel123
-- Login: student| Heslo: student123
+- Login: ucitel | Heslo: ucitel123
+- Login: student | Heslo: student123
