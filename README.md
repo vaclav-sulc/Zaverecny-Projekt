@@ -1,6 +1,6 @@
 # Přihlašovací údaje
 ## MySQL Databáze
-**[phpMyAdmin](phpmyadmin.co/sql.php)**
+**[phpMyAdmin](https://www.phpmyadmin.co/sql.php)**
 
 **Server:** sql7.freesqldatabase.com<br/>
 **Username:** sql7776236<br/>
