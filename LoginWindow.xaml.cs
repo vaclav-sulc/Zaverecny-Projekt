@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using MySql.Data.MySqlClient;
 
 namespace Zaverecny_Projekt
 {
@@ -9,7 +10,7 @@ namespace Zaverecny_Projekt
          * 
          *  Upravit hover effect u tlačítka "Login_Button"
          *  Přidat label varování zvlášt pro login a heslo
-         * 
+         *  Šifrovat hesla v databázi
          * 
          */
 
@@ -107,20 +108,52 @@ namespace Zaverecny_Projekt
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Login_TextBox.Text.ToLower() != "student" || Password_TextBox.Text != "zlab123")
+            using MySqlConnection mySqlConnection = new("server=sql7.freesqldatabase.com;user=sql7776236;password=rakYbIVDef;database=sql7776236;");
+            try
             {
-                Warning_Label.Visibility = Visibility.Visible;
+                mySqlConnection.Open();
 
-                ModifyLoginTextVisuals(false);
-                ModifyPasswordTextVisuals(false);
+                string sqlQuery = $"SELECT * FROM zlabgrade WHERE login = \"{Login_TextBox.Text.ToLower()}\" AND heslo = \"{Password_TextBox.Text}\"";
+                MySqlCommand command = new(sqlQuery, mySqlConnection);
+                
+                using MySqlDataReader dataReader = command.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+
+                    Warning_Label.Visibility = Visibility.Hidden;
+
+                    switch (dataReader["role"])
+                    {
+                        case "vedeni":
+                            break;
+
+                        case "ucitel":
+
+                            ucitelView ucitelView = new();
+                            this.Close();
+                            ucitelView.Show();
+                            break;
+
+                        case "student":
+
+                            Zak_vzhled studentWindow = new();
+                            this.Close();
+                            studentWindow.Show();
+                            break;
+                    }
+                }
+                else
+                {
+                    Warning_Label.Visibility = Visibility.Visible;
+
+                    ModifyLoginTextVisuals(false);
+                    ModifyPasswordTextVisuals(false);
+                }
             }
-            else
+            catch (Exception exception)
             {
-                Warning_Label.Visibility = Visibility.Hidden;
-
-                Zak_vzhled studentWindow = new();
-                this.Close();
-                studentWindow.ShowDialog();
+                Console.WriteLine("ERROR: " + exception.Message);
             }
         }
     }

@@ -13,7 +13,7 @@
 
         <TextBox x:Name="Login_TextBox" HorizontalAlignment="Center" Margin="0,180,0,0" Text="Uživatelské jméno" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="30" FontSize="16" FontStyle="Italic" Foreground="Gray" GotFocus="Login_TextBox_GotFocus" LostFocus="Login_TextBox_LostFocus"/>
         <TextBox x:Name="Password_TextBox" HorizontalAlignment="Center" Margin="0,220,0,0" Text="Heslo" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="30" FontSize="16" FontStyle="Italic" Foreground="Gray" GotFocus="Password_TextBox_GotFocus" LostFocus="Password_TextBox_LostFocus"/>
-        
+
         <Button x:Name="Login_Button" Content="Přihlásit se" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" Width="250" Height="35" FontSize="20" FontWeight="Bold" Background="Purple" Foreground="White" Click="Login_Button_Click"/>
     </Grid>
 </Window>
