@@ -1,11 +1,12 @@
-﻿<Window x:Class="ZlabGrade.Zak_vzhled"
+﻿<Window x:Class="ZlabGrade.StudentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZlabGrade"
         mc:Ignorable="d"
-        Title="ŽlabGrade" Height="450" Width="800">
+        Icon="/Obrázky/ŽlabGrade - Logo Mini.png"
+        Title="ŽlabGrade" Height="450" Width="800" Background="Transparent">
     <Grid>
         <Image x:Name="imgLogo" Height="100" Width="100" Margin="350,0,350,350"/>
         <Label x:Name="lblPozdrav" Content="Label" Margin="10,10,614,392"/>

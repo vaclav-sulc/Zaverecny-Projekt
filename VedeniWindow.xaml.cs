@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ZlabGrade
 {
     /// <summary>
-    /// Interakční logika pro ucitelView.xaml
+    /// Interakční logika pro VedeniWindow.xaml
     /// </summary>
-    public partial class ucitelView : Window
+    public partial class VedeniWindow : Window
     {
-        public ucitelView()
+        public VedeniWindow()
         {
             InitializeComponent();
         }

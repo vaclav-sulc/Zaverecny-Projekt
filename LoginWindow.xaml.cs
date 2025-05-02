@@ -1,17 +1,17 @@
 ﻿using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
-using Wpf.Ui.Controls;
+using HandyControl.Tools;
 
 namespace ZlabGrade
 {
-    public partial class LoginWindow : FluentWindow
+    public partial class LoginWindow : Window
     {
         /*                  TO DO LIST
          * 
-         *  Upravit hover effect u tlačítka "Login_Button"
-         *  Upravit vzhled u text boxů "LoginTextBox" a "PasswordBox"
          *  Přidat label varování zvlášt pro login a heslo
          *  
          */
@@ -19,6 +19,16 @@ namespace ZlabGrade
         public LoginWindow()
         {
             InitializeComponent();
+            ConfigHelper.Instance.SetLang("cz");
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox.Template.FindName("PART_TextBox", PasswordBox) is TextBox textBox)
+            {
+                textBox.Foreground = Brushes.White;
+                textBox.CaretBrush = Brushes.White;
+            }
         }
 
         //---------------------------------------------------------------------------\\
@@ -40,25 +50,27 @@ namespace ZlabGrade
                 {
                     dataReader.Read();
 
-                    WarningBar.Visibility = Visibility.Hidden;
+                    WarningLabel.Visibility = Visibility.Hidden;
 
                     switch (dataReader["role"])
                     {
                         case "vedeni":
 
+                            VedeniWindow vedeniWindow = new();
                             this.Close();
+                            vedeniWindow.Show();
                             break;
 
                         case "ucitel":
 
-                            ucitelView ucitelView = new();
+                            UcitelWindow ucitelWindow = new();
                             this.Close();
-                            ucitelView.Show();
+                            ucitelWindow.Show();
                             break;
 
                         case "student":
 
-                            Zak_vzhled studentWindow = new();
+                            StudentWindow studentWindow = new();
                             this.Close();
                             studentWindow.Show();
                             break;
@@ -66,7 +78,7 @@ namespace ZlabGrade
                 }
                 else
                 {
-                    WarningBar.IsOpen = true;
+                    WarningLabel.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception exception)
