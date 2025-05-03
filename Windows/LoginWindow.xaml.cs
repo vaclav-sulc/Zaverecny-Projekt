@@ -35,6 +35,9 @@ namespace ZlabGrade
         //                          User Authentication                              \\
         //---------------------------------------------------------------------------\\
 
+        public static string name = string.Empty;
+        public static string surname = string.Empty;
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             using MySqlConnection mySqlConnection = new("server=sql7.freesqldatabase.com;user=sql7776236;password=rakYbIVDef;database=sql7776236;");
@@ -42,7 +45,7 @@ namespace ZlabGrade
             {
                 mySqlConnection.Open();
 
-                string sqlQuery = $"SELECT * FROM zlabgrade WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{GetStringSha256Hash(PasswordBox.Password)}\"";
+                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{GetStringSha256Hash(PasswordBox.Password)}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
                 
                 using MySqlDataReader dataReader = command.ExecuteReader();
@@ -52,23 +55,26 @@ namespace ZlabGrade
 
                     WarningLabel.Visibility = Visibility.Hidden;
 
+                    name = dataReader["jmeno"].ToString();
+                    surname = dataReader["prijmeni"].ToString();
+
                     switch (dataReader["role"])
                     {
-                        case "vedeni":
+                        case "Vedení":
 
                             VedeniWindow vedeniWindow = new();
                             this.Close();
                             vedeniWindow.Show();
                             break;
 
-                        case "ucitel":
+                        case "Učitel":
 
                             UcitelWindow ucitelWindow = new();
                             this.Close();
                             ucitelWindow.Show();
                             break;
 
-                        case "student":
+                        case "Student":
 
                             StudentWindow studentWindow = new();
                             this.Close();
