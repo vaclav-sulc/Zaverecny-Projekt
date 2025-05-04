@@ -10,12 +10,6 @@ namespace ZlabGrade
 {
     public partial class LoginWindow : Window
     {
-        /*                  TO DO LIST
-         * 
-         *  Přidat label varování zvlášt pro login a heslo
-         *  
-         */
-
         public LoginWindow()
         {
             InitializeComponent();
@@ -37,6 +31,7 @@ namespace ZlabGrade
 
         public static string name = string.Empty;
         public static string surname = string.Empty;
+        public static int userID;
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
@@ -57,6 +52,7 @@ namespace ZlabGrade
 
                     name = dataReader["jmeno"].ToString();
                     surname = dataReader["prijmeni"].ToString();
+                    userID = Convert.ToInt32(dataReader["id_uzivatele"]);
 
                     switch (dataReader["role"])
                     {
@@ -93,7 +89,7 @@ namespace ZlabGrade
             }
         }
 
-        private static string GetStringSha256Hash(string text)
+        public static string GetStringSha256Hash(string text)
         {
             if (string.IsNullOrEmpty(text))
             {
