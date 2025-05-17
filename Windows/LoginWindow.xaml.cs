@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
 using HandyControl.Tools;
+using ZlabGrade.Scripts;
 
 namespace ZlabGrade
 {
@@ -35,7 +36,7 @@ namespace ZlabGrade
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            using MySqlConnection mySqlConnection = new("server=sql7.freesqldatabase.com;user=sql7776236;password=rakYbIVDef;database=sql7776236;");
+            using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
                 mySqlConnection.Open();

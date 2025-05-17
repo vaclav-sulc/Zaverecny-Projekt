@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using MySql.Data.MySqlClient;
+using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages
 {
@@ -11,11 +13,25 @@ namespace ZlabGrade.Pages
             InitializeComponent();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (NewPasswordBox.Template.FindName("PART_TextBox", NewPasswordBox) is TextBox textBoxNew)
+            {
+                textBoxNew.Foreground = Brushes.White;
+                textBoxNew.CaretBrush = Brushes.White;
+            }
+            if (ConfirmNewPasswordBox.Template.FindName("PART_TextBox", ConfirmNewPasswordBox) is TextBox textBoxConfirm)
+            {
+                textBoxConfirm.Foreground = Brushes.White;
+                textBoxConfirm.CaretBrush = Brushes.White;
+            }
+        }
+
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
             if (NewPasswordBox.Password == ConfirmNewPasswordBox.Password && !string.IsNullOrEmpty(NewPasswordBox.Password))
             {
-                using MySqlConnection mySqlConnection = new("server=sql7.freesqldatabase.com;user=sql7776236;password=rakYbIVDef;database=sql7776236;");
+                using MySqlConnection mySqlConnection = new(Database.loginString);
                 try
                 {
                     mySqlConnection.Open();
