@@ -13,7 +13,7 @@ namespace ZlabGrade
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            NameButton.Content = $"{LoginWindow.name} {LoginWindow.surname}";
+            NameButton.Content = $"{LoginWindow.name} {LoginWindow.surname}, {LoginWindow.classroom}";
         }
 
         private void NameButton_Click(object sender, RoutedEventArgs e)

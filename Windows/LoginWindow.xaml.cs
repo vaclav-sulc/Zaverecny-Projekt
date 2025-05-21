@@ -32,6 +32,7 @@ namespace ZlabGrade
 
         public static string name = string.Empty;
         public static string surname = string.Empty;
+        public static string classroom = string.Empty;
         public static int userID;
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -72,6 +73,8 @@ namespace ZlabGrade
                             break;
 
                         case "Student":
+
+                            classroom = dataReader["trida"].ToString();
 
                             StudentWindow studentWindow = new();
                             this.Close();
