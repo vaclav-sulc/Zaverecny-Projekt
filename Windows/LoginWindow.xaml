@@ -18,7 +18,8 @@
             </hc:PasswordBox.Resources>
         </hc:PasswordBox>
 
-        <Label x:Name="WarningLabel" Content="Zadán neplatný login nebo heslo!" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" Height="30" FontSize="14" FontWeight="Bold" Background="#d12424" Foreground="White" BorderThickness="0"/>
+        <Label x:Name="WrongCredentialsLabel" Content="Zadán neplatný login nebo heslo!" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" Height="30" FontSize="14" FontWeight="Bold" Background="#d12424" Foreground="White" BorderThickness="0"/>
+        <Label x:Name="ConnectionErrorLabel" Content="Spojení selhalo, zkuste to prosím znovu později" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" Height="30" FontSize="14" FontWeight="Bold" Background="#d12424" Foreground="White" BorderThickness="0"/>
 
         <Button x:Name="LoginButton" Content="Přihlásit se" Margin="0,350,0,0" VerticalAlignment="Top" Width="330" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" Click="LoginButton_Click"/>
     </Grid>

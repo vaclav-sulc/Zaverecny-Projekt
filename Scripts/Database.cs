@@ -2,6 +2,6 @@
 {
     static class Database
     {
-        public const string loginString = "server=sql7.freesqldatabase.com;user=sql7779434;password=b5EEgb4xkm;database=sql7779434;";
+        public const string loginString = "server=sql7.freesqldatabase.com;user=sql7781252;password=ZdVzchgtJ7;database=sql7781252;";
     }
 }

@@ -50,7 +50,7 @@ namespace ZlabGrade
                 {
                     dataReader.Read();
 
-                    WarningLabel.Visibility = Visibility.Hidden;
+                    WrongCredentialsLabel.Visibility = Visibility.Hidden;
 
                     name = dataReader["jmeno"].ToString();
                     surname = dataReader["prijmeni"].ToString();
@@ -84,11 +84,13 @@ namespace ZlabGrade
                 }
                 else
                 {
-                    WarningLabel.Visibility = Visibility.Visible;
+                    WrongCredentialsLabel.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception exception)
             {
+                ConnectionErrorLabel.Visibility = Visibility.Visible;
+
                 Console.WriteLine("ERROR: " + exception.Message);
             }
         }
