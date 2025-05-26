@@ -8,7 +8,15 @@
       mc:Ignorable="d"
       d:DesignHeight="370" d:DesignWidth="666"
       Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
-    <Grid>
-        <TextBlock Text="Známky" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Calibri"/>
+    <Grid Margin="12">
+        <hc:ComboBox HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="400"/>
+        <DataGrid Margin="10,43,10,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Foreground="White" Header="Předmět" Binding="{Binding Subject}" Width="*"/>
+                <DataGridTextColumn Header="Známka" Binding="{Binding Grade}" Width="*"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="*"/>
+                <DataGridTextColumn Header="Učitel" Binding="{Binding Teacher}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
