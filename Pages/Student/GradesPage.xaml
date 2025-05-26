@@ -8,14 +8,15 @@
       mc:Ignorable="d"
       d:DesignHeight="370" d:DesignWidth="666"
       Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
+
     <Grid Margin="12">
-        <hc:ComboBox HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="400"/>
-        <DataGrid Margin="10,43,10,10">
+        <hc:ComboBox Style="{StaticResource MyComboBox}" x:Name="PredmetyComboBox" Background="Transparent" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="400" SelectionChanged="PredmetyComboBox_SelectionChanged"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource Skibidi}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="Znamky" Margin="10,43,10,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Foreground="White" Header="Předmět" Binding="{Binding Subject}" Width="*"/>
-                <DataGridTextColumn Header="Známka" Binding="{Binding Grade}" Width="*"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="*"/>
-                <DataGridTextColumn Header="Učitel" Binding="{Binding Teacher}" Width="*"/>
+                <DataGridTextColumn Header="Předmět" Binding="{Binding Predmet}" Width="*"/>
+                <DataGridTextColumn Header="Známka" Binding="{Binding Znamka}" Width="*"/>
+                <DataGridTextColumn Header="Váha" Binding="{Binding Vaha}" Width="*"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=dd.MM.yyyy}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
