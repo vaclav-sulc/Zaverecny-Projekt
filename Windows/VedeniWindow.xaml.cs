@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using ZlabGrade.Pages;
 using ZlabGrade.Pages.Student;
+using ZlabGrade.Pages.Management;
 
 namespace ZlabGrade
 {
@@ -33,24 +34,14 @@ namespace ZlabGrade
             ContentFrame.Navigate(new NoticeboardPage());
         }
 
-        private void GradesButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentFrame.Navigate(new GradesPage());
-        }
-
-        private void ScheduleButton_Click(object sender, RoutedEventArgs e)
+        private void SchedulesButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new SchedulePage());
         }
 
-        private void AbsenceButton_Click(object sender, RoutedEventArgs e)
+        private void UsersButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new AbsencePage());
-        }
-
-        private void SubjectsButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentFrame.Navigate(new SubjectsPage());
+            ContentFrame.Navigate(new UserPage());
         }
     }
 }

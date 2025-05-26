@@ -8,8 +8,8 @@
       d:DesignHeight="370" d:DesignWidth="666"
       Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
     <Grid>
-        <TextBlock x:Name="WarningText" Text="Nemáte žádné předměty" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Calibri"/>
+        <TextBlock x:Name="WarningText" Text="Nebyly nalezeny žádné předměty" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Calibri"/>
 
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=10}" x:Name="SubjectList" Margin="205,25,10,25" Background="Transparent" BorderThickness="0"/>
+        <ListBox x:Name="SubjectList" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="205,25,10,25" Background="Transparent" BorderThickness="0"/>
     </Grid>
 </Page>
