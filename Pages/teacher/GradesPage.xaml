@@ -1,0 +1,34 @@
+﻿<Page x:Class="ZlabGrade.Pages.Teacher.GradesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ZlabGrade.Pages.Teacher"
+      mc:Ignorable="d"
+      d:DesignHeight="400" d:DesignWidth="666"
+      Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
+    <Grid>
+        <TextBlock Text="Správa známek" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Calibri"/>
+
+        <!-- Seznam studentů -->
+        <ListBox x:Name="StudentsList" Margin="25,55,400,25" Background="Transparent" BorderThickness="0" SelectionChanged="StudentsList_SelectionChanged"/>
+
+        <!-- Detail studenta a známky -->
+        <TextBlock x:Name="StudentNameBlock" Text="" HorizontalAlignment="Right" Margin="0,55,25,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Width="350"/>
+
+        <!-- Seznam známek studenta -->
+        <ListBox x:Name="GradesList" Margin="0,85,25,120" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Width="350"/>
+
+        <!-- Přidání nové známky -->
+        <TextBlock Text="Přidat známku:" HorizontalAlignment="Right" Margin="0,0,300,80" VerticalAlignment="Bottom" Foreground="White" FontSize="16" FontWeight="Bold" FontFamily="Calibri"/>
+
+        <hc:TextBox x:Name="GradeValueBox" HorizontalAlignment="Right" Margin="0,0,200,50" hc:InfoElement.Placeholder="Známka (1-5)" VerticalAlignment="Bottom" Width="80" Height="25" FontSize="14" FontFamily="Calibri" Background="#3a3d3b" Foreground="White" BorderThickness="0" CaretBrush="White"/>
+
+        <hc:TextBox x:Name="GradeDescriptionBox" HorizontalAlignment="Right" Margin="0,0,25,50" hc:InfoElement.Placeholder="Popis" VerticalAlignment="Bottom" Width="165" Height="25" FontSize="14" FontFamily="Calibri" Background="#3a3d3b" Foreground="White" BorderThickness="0" CaretBrush="White"/>
+
+        <Button x:Name="AddGradeButton" Content="Přidat" HorizontalAlignment="Right" Margin="0,0,25,15" VerticalAlignment="Bottom" Width="80" Height="25" FontSize="14" FontWeight="Bold" FontFamily="Calibri" Background="#d12424" Foreground="White" BorderThickness="0" Click="AddGradeButton_Click"/>
+
+        <Button x:Name="DeleteGradeButton" Content="Smazat vybranou" HorizontalAlignment="Right" Margin="0,0,115,15" VerticalAlignment="Bottom" Width="120" Height="25" FontSize="14" FontWeight="Bold" FontFamily="Calibri" Background="#8b0000" Foreground="White" BorderThickness="0" Click="DeleteGradeButton_Click"/>
+    </Grid>
+</Page>
