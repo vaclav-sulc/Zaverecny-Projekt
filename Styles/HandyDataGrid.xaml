@@ -9,9 +9,6 @@
        TargetType="DataGridCell"
           BasedOn="{StaticResource DataGridCellStyle}">
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource RowHoverBrush}"/>
-            </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Purple"/>
             </Trigger>
@@ -53,10 +50,6 @@
         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
 
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource RowHoverBrush}"/>
-            </Trigger>
-
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Purple"/>
             </Trigger>
@@ -83,18 +76,28 @@
         <Setter Property="Padding"    Value="6,3"/>
 
         <Style.Triggers>
-            <!-- kurzor nad řádkem -->
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource RowHoverBrush}"/>
-            </Trigger>
-
-            <!-- vybraná položka -->
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Purple"/>
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+    <Style x:Key="MyListBoxItem"
+            TargetType="ListBoxItem"
+           BasedOn="{StaticResource ListBoxItemBaseStyle}">
+
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="Purple"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+        <Style TargetType="ListBox"
+       BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource MyListBoxItem}"/>
+    </Style>
+
     <Style x:Key="MyComboBox"
        TargetType="hc:ComboBox"
        BasedOn="{StaticResource {x:Type hc:ComboBox}}">
@@ -105,7 +108,6 @@
         <Setter Property="Padding" Value="8,4"/>
         <Setter Property="hc:BorderElement.CornerRadius" Value="6"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource PurpleListItem}"/>
-
 
 
         <!-- triggery -->

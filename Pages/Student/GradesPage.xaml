@@ -10,7 +10,7 @@
       Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
 
     <Grid Margin="12">
-        <hc:ComboBox Style="{StaticResource MyComboBox}" x:Name="PredmetyComboBox" HorizontalAlignment="Center" VerticalAlignment="Top" Width="400" SelectionChanged="PredmetyComboBox_SelectionChanged"/>
+        <hc:ComboBox Style="{StaticResource MyComboBox}" x:Name="PredmetyComboBox" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="400" SelectionChanged="PredmetyComboBox_SelectionChanged" Margin="0,0,0,318"/>
         <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource Skibidi}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="Znamky" Margin="5,43,5,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Popis" Binding="{Binding Popis}" Width="3*"/>
