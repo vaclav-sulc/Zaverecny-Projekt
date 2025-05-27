@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using ZlabGrade.Pages;
 using ZlabGrade.Pages.Student;
+using HandyControl.Controls;
 
 namespace ZlabGrade
 {
-    public partial class StudentWindow : Window
+    public partial class StudentWindow : HandyControl.Controls.Window
     {
         public StudentWindow()
         {

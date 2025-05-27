@@ -4,7 +4,7 @@ using ZlabGrade.Pages.Student;
 
 namespace ZlabGrade
 {
-    public partial class UcitelWindow : Window
+    public partial class UcitelWindow : HandyControl.Controls.Window
     {
         public UcitelWindow()
         {

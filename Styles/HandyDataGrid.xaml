@@ -50,7 +50,6 @@
            TargetType="DataGridRow"
            BasedOn="{StaticResource DataGridRowStyle}">
 
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
 
         <Style.Triggers>
