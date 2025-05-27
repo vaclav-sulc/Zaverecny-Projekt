@@ -9,7 +9,7 @@
         Icon="/Images/ŽlabGrade - Logo Mini.png"
         
         
-        Title="ŽlabGrade" Height="450" Width="800" ResizeMode="CanMinimize" Background="Transparent" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="ŽlabGrade" Height="450" Width="800" ResizeMode="CanMinimize" Background="Transparent" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
