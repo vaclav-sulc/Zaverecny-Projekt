@@ -4,8 +4,46 @@
     xmlns:hc="https://handyorg.github.io/handycontrol">
 
     <SolidColorBrush x:Key="RowHoverBrush"   Color="#FFCC62DE"/> <!-- light purple  -->
-    <SolidColorBrush x:Key="CbBg"      Color="#1C1C1C"/>
-    <SolidColorBrush x:Key="CbBgHover" Color="#262626"/>
+
+    <Style x:Key="MyDataGridCell"
+       TargetType="DataGridCell"
+          BasedOn="{StaticResource DataGridCellStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource RowHoverBrush}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="Purple"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="MyDataGridColumnHeader"
+           TargetType="DataGridColumnHeader"
+              BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0,10,0,10"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="hc:BorderElement.CornerRadius" Value="30"/>
+
+        <Style.Resources>
+            <SolidColorBrush x:Key="PrimaryBrush" Color="White"/>
+        </Style.Resources>
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}"/>
+            </Trigger>
+            <Trigger Property="SortDirection" Value="Ascending">
+                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}"/>
+            </Trigger>
+            <Trigger Property="SortDirection" Value="Descending">
+                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <!-- TS PISSED ME OFF SM  -->
     <Style x:Key="MyDataGridRowStyle"
@@ -13,27 +51,29 @@
            BasedOn="{StaticResource DataGridRowStyle}">
 
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource RowHoverBrush}"/>
-                <Setter Property="Foreground" Value="White"/>
             </Trigger>
 
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Purple"/>
-                <Setter Property="Foreground" Value="White"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <!-- █ 3)  Styl pro celý DataGrid – jen přepojí RowStyle  -->
     <Style x:Key="Skibidi"
            TargetType="DataGrid"
            BasedOn="{StaticResource {x:Type DataGrid}}">
         <Setter Property="RowStyle" Value="{StaticResource MyDataGridRowStyle}"/>
-        
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource MyDataGridColumnHeader}"/>
+        <Setter Property="CellStyle" Value="{StaticResource MyDataGridCell}"/>
+        <Setter Property="BorderBrush" Value="Purple"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CanUserResizeColumns" Value="False"/>
+
     </Style>
 
 
@@ -41,20 +81,17 @@
        TargetType="ComboBoxItem"
        BasedOn="{StaticResource ListBoxItemBaseStyle}">
 
-        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Padding"    Value="6,3"/>
 
         <Style.Triggers>
             <!-- kurzor nad řádkem -->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource RowHoverBrush}"/>
-                <Setter Property="Foreground" Value="White"/>
             </Trigger>
 
             <!-- vybraná položka -->
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Purple"/>
-                <Setter Property="Foreground" Value="White"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -63,9 +100,6 @@
        TargetType="hc:ComboBox"
        BasedOn="{StaticResource {x:Type hc:ComboBox}}">
 
-        <!-- statické settery -->
-        <Setter Property="Background" Value="{StaticResource CbBg}"/>
-        <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="Purple"/>
         <Setter Property="SelectionBrush" Value="{DynamicResource RowHoverBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -74,14 +108,9 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource PurpleListItem}"/>
 
 
+
         <!-- triggery -->
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource CbBgHover}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value=".5"/>
-            </Trigger>
             <!-- rozbalený stav -->
             <Trigger Property="IsDropDownOpen" Value="True">
                 <Setter Property="BorderThickness" Value="2"/>

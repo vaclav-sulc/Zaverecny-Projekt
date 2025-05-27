@@ -53,9 +53,12 @@ namespace ZlabGrade
             {
                 mySqlConnection.Open();
 
-                string sqlQuery = @"SELECT predmet, datum, znamka, vaha FROM Grades WHERE predmet = @predmet";
+                string sqlQuery = @"SELECT popis, datum, znamka, vaha FROM Grades WHERE predmet = @predmet AND id_zaka = @userID";
+
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
-                var cmd = command.Parameters.AddWithValue("@predmet", PredmetyComboBox.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@predmet", PredmetyComboBox.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@userID", LoginWindow.userID);
+
 
                 using MySqlDataReader dataReader = command.ExecuteReader();
                 if (dataReader.HasRows)
@@ -65,7 +68,7 @@ namespace ZlabGrade
                     {
                         Znamky.Items.Add(new
                         {
-                            Predmet = dataReader["predmet"].ToString(),
+                            Popis = dataReader["popis"].ToString(),
                             Datum = dataReader.GetDateTime("datum"),
                             Znamka = dataReader["znamka"].ToString(),
                             Vaha = dataReader["vaha"].ToString()
