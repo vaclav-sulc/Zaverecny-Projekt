@@ -7,7 +7,7 @@ using ZlabGrade.Scripts;
 
 namespace ZlabGrade
 {
-    public partial class LoginWindow : Window
+    public partial class LoginWindow : HandyControl.Controls.Window
     {
         public LoginWindow()
         {

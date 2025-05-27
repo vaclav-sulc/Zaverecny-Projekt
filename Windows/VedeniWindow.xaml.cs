@@ -5,7 +5,7 @@ using ZlabGrade.Pages.Management;
 
 namespace ZlabGrade
 {
-    public partial class VedeniWindow : Window
+    public partial class VedeniWindow : HandyControl.Controls.Window
     {
         public VedeniWindow()
         {

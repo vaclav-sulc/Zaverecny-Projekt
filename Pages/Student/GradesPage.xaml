@@ -10,13 +10,13 @@
       Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
 
     <Grid Margin="12">
-        <hc:ComboBox Style="{StaticResource MyComboBox}" x:Name="PredmetyComboBox" Background="Transparent" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="400" SelectionChanged="PredmetyComboBox_SelectionChanged"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource Skibidi}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="Znamky" Margin="10,43,10,10">
+        <hc:ComboBox Style="{StaticResource MyComboBox}" x:Name="PredmetyComboBox" HorizontalAlignment="Center" VerticalAlignment="Top" Width="400" SelectionChanged="PredmetyComboBox_SelectionChanged"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource Skibidi}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="Znamky" Margin="5,43,5,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Předmět" Binding="{Binding Predmet}" Width="*"/>
+                <DataGridTextColumn Header="Popis" Binding="{Binding Popis}" Width="3*"/>
                 <DataGridTextColumn Header="Známka" Binding="{Binding Znamka}" Width="*"/>
                 <DataGridTextColumn Header="Váha" Binding="{Binding Vaha}" Width="*"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=dd.MM.yyyy}" Width="*"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=dd.MM.yyyy}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
