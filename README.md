@@ -3,8 +3,8 @@
 **[phpMyAdmin](https://www.phpmyadmin.co/sql.php)**
 
 **Server:** sql7.freesqldatabase.com<br/>
-**Username:** sql7776236<br/>
-**Password:** rakYbIVDef
+**Username:** sql7781252<br/>
+**Password:** ZdVzchgtJ7
 
 ## Uživatelé
 | Username | Heslo |

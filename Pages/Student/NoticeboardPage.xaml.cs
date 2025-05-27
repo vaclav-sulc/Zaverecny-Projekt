@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using MySql.Data.MySqlClient;
+using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages.Student
 {
@@ -13,9 +14,9 @@ namespace ZlabGrade.Pages.Student
 
         List<NoticeboardMessage> noticeboardMessages = [];
 
-        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            using MySqlConnection mySqlConnection = new("server=sql7.freesqldatabase.com;user=sql7776236;password=rakYbIVDef;database=sql7776236;");
+            using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
                 mySqlConnection.Open();
@@ -43,7 +44,7 @@ namespace ZlabGrade.Pages.Student
             }
             catch (Exception exception)
             {
-                Console.WriteLine("ERROR: " + exception.Message);
+                MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

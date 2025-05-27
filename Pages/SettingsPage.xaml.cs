@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using MySql.Data.MySqlClient;
+using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages
 {
@@ -15,7 +17,7 @@ namespace ZlabGrade.Pages
         {
             if (NewPasswordBox.Password == ConfirmNewPasswordBox.Password && !string.IsNullOrEmpty(NewPasswordBox.Password))
             {
-                using MySqlConnection mySqlConnection = new("server=sql7.freesqldatabase.com;user=sql7776236;password=rakYbIVDef;database=sql7776236;");
+                using MySqlConnection mySqlConnection = new(Database.loginString);
                 try
                 {
                     mySqlConnection.Open();
@@ -23,7 +25,7 @@ namespace ZlabGrade.Pages
                     string sqlQuery = $"UPDATE Credentials SET heslo = @NewPassword WHERE id_uzivatele = {LoginWindow.userID}";
                     MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                    command.Parameters.AddWithValue("@NewPassword", LoginWindow.GetStringSha256Hash(NewPasswordBox.Password));
+                    command.Parameters.AddWithValue("@NewPassword", Database.GetStringSha256Hash(NewPasswordBox.Password));
 
                     command.ExecuteNonQuery();
 
@@ -32,7 +34,7 @@ namespace ZlabGrade.Pages
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine("ERROR: " + exception.Message);
+                    MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else

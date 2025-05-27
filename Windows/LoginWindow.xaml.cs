@@ -1,14 +1,13 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
 using HandyControl.Tools;
+using ZlabGrade.Scripts;
 
 namespace ZlabGrade
 {
-    public partial class LoginWindow : Window
+    public partial class LoginWindow : HandyControl.Controls.Window
     {
         public LoginWindow()
         {
@@ -31,16 +30,17 @@ namespace ZlabGrade
 
         public static string name = string.Empty;
         public static string surname = string.Empty;
+        public static string classroom = string.Empty;
         public static int userID;
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            using MySqlConnection mySqlConnection = new("server=sql7.freesqldatabase.com;user=sql7776236;password=rakYbIVDef;database=sql7776236;");
+            using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
                 mySqlConnection.Open();
 
-                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{GetStringSha256Hash(PasswordBox.Password)}\"";
+                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{Database.GetStringSha256Hash(PasswordBox.Password)}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
                 
                 using MySqlDataReader dataReader = command.ExecuteReader();
@@ -48,7 +48,7 @@ namespace ZlabGrade
                 {
                     dataReader.Read();
 
-                    WarningLabel.Visibility = Visibility.Hidden;
+                    WrongCredentialsLabel.Visibility = Visibility.Hidden;
 
                     name = dataReader["jmeno"].ToString();
                     surname = dataReader["prijmeni"].ToString();
@@ -72,6 +72,8 @@ namespace ZlabGrade
 
                         case "Student":
 
+                            classroom = dataReader["trida"].ToString();
+
                             StudentWindow studentWindow = new();
                             this.Close();
                             studentWindow.Show();
@@ -80,26 +82,15 @@ namespace ZlabGrade
                 }
                 else
                 {
-                    WarningLabel.Visibility = Visibility.Visible;
+                    WrongCredentialsLabel.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception exception)
             {
+                ConnectionErrorLabel.Visibility = Visibility.Visible;
+
                 Console.WriteLine("ERROR: " + exception.Message);
             }
-        }
-
-        public static string GetStringSha256Hash(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                return string.Empty;
-            }
-
-            byte[] buffer = Encoding.UTF8.GetBytes(text);
-            byte[] hash = SHA256.HashData(buffer);
-
-            return BitConverter.ToString(hash).Replace("-", string.Empty);
         }
     }
 }

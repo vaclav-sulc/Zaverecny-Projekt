@@ -6,9 +6,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ZlabGrade"
       mc:Ignorable="d"
-      d:DesignHeight="400" d:DesignWidth="666"
-      Title="ŽlabGrade" Background="Transparent">
-    <Grid>
-        <TextBlock Text="Známky" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Calibri"/>
+      d:DesignHeight="370" d:DesignWidth="666"
+      Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
+
+    <Grid Margin="12">
+        <hc:ComboBox Style="{StaticResource MyComboBox}" x:Name="PredmetyComboBox" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="400" SelectionChanged="PredmetyComboBox_SelectionChanged" Margin="0,0,0,318"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource Skibidi}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="Znamky" Margin="5,43,5,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Popis" Binding="{Binding Popis}" Width="3*"/>
+                <DataGridTextColumn Header="Známka" Binding="{Binding Znamka}" Width="*"/>
+                <DataGridTextColumn Header="Váha" Binding="{Binding Vaha}" Width="*"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=dd.MM.yyyy}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

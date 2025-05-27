@@ -1,0 +1,30 @@
+﻿<Page x:Class="ZlabGrade.Pages.Management.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ZlabGrade.Pages.Management"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      mc:Ignorable="d"
+      d:DesignHeight="370" d:DesignWidth="666"
+      Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
+    <Grid>
+        <TextBlock x:Name="WarningText" Text="Nebyly nalezeni žádní uživatelé" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" FontFamily="Calibri"/>
+
+        <Button x:Name="NewUserButton" Content="Založit" Margin="150,320,0,0" VerticalAlignment="Top" Width="110" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="NewUserButton_Click"/>
+        <Button x:Name="EditUserButton" Content="Upravit" Margin="275,320,0,0" VerticalAlignment="Top" Width="110" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="EditUserButton_Click"/>
+        <Button x:Name="DeleteUserButton" Content="Smazat" Margin="400,320,0,0" VerticalAlignment="Top" Width="110" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="DeleteUserButton_Click"/>
+
+        <ListBox x:Name="UserList" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="10,10,10,65" Background="Transparent" BorderThickness="0"/>
+
+        <StackPanel x:Name="UserTextBoxes" Visibility="Hidden">
+            <hc:TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="225,30,0,0" hc:InfoElement.Placeholder="Jméno" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" Background="#3a3d3b" Foreground="White" BorderThickness="0" CaretBrush="White"/>
+            <hc:TextBox x:Name="SurnameTextBox" HorizontalAlignment="Left" Margin="225,4,0,0" hc:InfoElement.Placeholder="Příjmení" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" Background="#3a3d3b" Foreground="White" BorderThickness="0" CaretBrush="White"/>
+            <hc:TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="225,4,0,0" hc:InfoElement.Placeholder="Login" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" Background="#3a3d3b" Foreground="White" BorderThickness="0" CaretBrush="White"/>
+            <hc:TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="225,4,0,0" hc:InfoElement.Placeholder="Heslo" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" Background="#3a3d3b" Foreground="White" BorderThickness="0" CaretBrush="White"/>
+            <hc:TextBox x:Name="ClassroomTextBox" HorizontalAlignment="Left" Margin="225,4,0,0" hc:InfoElement.Placeholder="Třída" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="35" FontSize="18" FontFamily="Calibri" Background="#3a3d3b" Foreground="White" BorderThickness="0" CaretBrush="White"/>
+
+            <Button x:Name="SaveButton" Content="Uložit" Margin="225,15,0,0" Width="200" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="SaveButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

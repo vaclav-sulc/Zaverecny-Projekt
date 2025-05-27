@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using ZlabGrade.Pages;
 using ZlabGrade.Pages.Student;
+using HandyControl.Controls;
 
 namespace ZlabGrade
 {
-    public partial class StudentWindow : Window
+    public partial class StudentWindow : HandyControl.Controls.Window
     {
         public StudentWindow()
         {
@@ -13,7 +14,7 @@ namespace ZlabGrade
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            NameButton.Content = $"{LoginWindow.name} {LoginWindow.surname}";
+            NameButton.Content = $"{LoginWindow.name} {LoginWindow.surname}, {LoginWindow.classroom}";
         }
 
         private void NameButton_Click(object sender, RoutedEventArgs e)
