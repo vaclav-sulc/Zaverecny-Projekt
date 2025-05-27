@@ -39,7 +39,7 @@ namespace ZlabGrade.Pages
                     string sqlQuery = $"UPDATE Credentials SET heslo = @NewPassword WHERE id_uzivatele = {LoginWindow.userID}";
                     MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                    command.Parameters.AddWithValue("@NewPassword", LoginWindow.GetStringSha256Hash(NewPasswordBox.Password));
+                    command.Parameters.AddWithValue("@NewPassword", Database.GetStringSha256Hash(NewPasswordBox.Password));
 
                     command.ExecuteNonQuery();
 
@@ -48,7 +48,7 @@ namespace ZlabGrade.Pages
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine("ERROR: " + exception.Message);
+                    MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else

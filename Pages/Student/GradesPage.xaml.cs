@@ -1,5 +1,6 @@
-﻿using System.Windows.Controls;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System.Windows;
+using System.Windows.Controls;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade
@@ -79,7 +80,7 @@ namespace ZlabGrade
             }
             catch (Exception exception)
             {
-                Console.WriteLine("ERROR: " + exception.Message);
+                MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

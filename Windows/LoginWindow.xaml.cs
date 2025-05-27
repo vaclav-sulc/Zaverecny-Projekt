@@ -1,8 +1,6 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
 using HandyControl.Tools;
 using ZlabGrade.Scripts;
@@ -42,7 +40,7 @@ namespace ZlabGrade
             {
                 mySqlConnection.Open();
 
-                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{GetStringSha256Hash(PasswordBox.Password)}\"";
+                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{Database.GetStringSha256Hash(PasswordBox.Password)}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
                 
                 using MySqlDataReader dataReader = command.ExecuteReader();
@@ -93,19 +91,6 @@ namespace ZlabGrade
 
                 Console.WriteLine("ERROR: " + exception.Message);
             }
-        }
-
-        public static string GetStringSha256Hash(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                return string.Empty;
-            }
-
-            byte[] buffer = Encoding.UTF8.GetBytes(text);
-            byte[] hash = SHA256.HashData(buffer);
-
-            return BitConverter.ToString(hash).Replace("-", string.Empty);
         }
     }
 }

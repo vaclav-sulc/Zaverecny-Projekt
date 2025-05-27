@@ -44,7 +44,7 @@ namespace ZlabGrade.Pages.Student
             }
             catch (Exception exception)
             {
-                Console.WriteLine("ERROR: " + exception.Message);
+                MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
