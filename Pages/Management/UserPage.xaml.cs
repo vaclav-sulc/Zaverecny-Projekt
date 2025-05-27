@@ -1,7 +1,7 @@
-﻿using MySql.Data.MySqlClient;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using MySql.Data.MySqlClient;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages.Management
@@ -58,7 +58,7 @@ namespace ZlabGrade.Pages.Management
             NameTextBox.Text = string.Empty;
             SurnameTextBox.Text = string.Empty;
             LoginTextBox.Text = string.Empty;
-            PasswordTextBox.Text = string.Empty;
+            PasswordBox.Password = string.Empty;
             ClassroomTextBox.Text = string.Empty;
 
             creatingNewUser = true;
@@ -128,7 +128,7 @@ namespace ZlabGrade.Pages.Management
                 command.Parameters.AddWithValue("@name", NameTextBox.Text);
                 command.Parameters.AddWithValue("@surname", SurnameTextBox.Text);
                 command.Parameters.AddWithValue("@login", LoginTextBox.Text);
-                command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(PasswordTextBox.Text));
+                command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(PasswordBox.Password));
                 command.Parameters.AddWithValue("@role", "Student");
                 command.Parameters.AddWithValue("@classroom", ClassroomTextBox.Text);
 
