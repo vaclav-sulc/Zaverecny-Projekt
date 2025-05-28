@@ -1,22 +1,51 @@
-﻿<Page x:Class="ZlabGrade.GradesPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:hc="https://handyorg.github.io/handycontrol"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:ZlabGrade"
-      mc:Ignorable="d"
-      d:DesignHeight="370" d:DesignWidth="666"
-      Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
+﻿<Page
+    x:Class="ZlabGrade.GradesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:ZlabGrade"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ŽlabGrade"
+    d:DesignHeight="370"
+    d:DesignWidth="666"
+    Background="Transparent"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
 
     <Grid Margin="12">
-        <hc:ComboBox Style="{StaticResource MyComboBox}" x:Name="PredmetyComboBox" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="400" SelectionChanged="PredmetyComboBox_SelectionChanged" Margin="0,0,0,318"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource Skibidi}" IsReadOnly="True" AutoGenerateColumns="False" x:Name="Znamky" Margin="5,43,5,10">
+        <hc:ComboBox
+            x:Name="PredmetyComboBox"
+            Width="400"
+            Margin="0,0,0,310"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            SelectionChanged="PredmetyComboBox_SelectionChanged"
+            Style="{StaticResource MyComboBox}" />
+        <DataGrid
+            x:Name="Znamky"
+            Margin="5,43,5,10"
+            d:ItemsSource="{d:SampleData ItemCount=5}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            Style="{StaticResource Skibidi}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Popis" Binding="{Binding Popis}" Width="3*"/>
-                <DataGridTextColumn Header="Známka" Binding="{Binding Znamka}" Width="*"/>
-                <DataGridTextColumn Header="Váha" Binding="{Binding Vaha}" Width="*"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat=dd.MM.yyyy}" Width="2*"/>
+                <DataGridTextColumn
+                    Width="3*"
+                    Binding="{Binding Popis}"
+                    Header="Popis" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Znamka}"
+                    Header="Známka" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Vaha}"
+                    Header="Váha" />
+                <DataGridTextColumn
+                    Width="2*"
+                    Binding="{Binding Datum, StringFormat=dd.MM.yyyy}"
+                    Header="Datum" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
