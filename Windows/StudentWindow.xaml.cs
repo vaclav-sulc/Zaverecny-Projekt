@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using ZlabGrade.Pages;
 using ZlabGrade.Pages.Student;
-using HandyControl.Controls;
 
 namespace ZlabGrade
 {

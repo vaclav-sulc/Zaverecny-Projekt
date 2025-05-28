@@ -1,8 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using MySql.Data.MySqlClient;
-using HandyControl.Tools;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade
@@ -12,21 +10,7 @@ namespace ZlabGrade
         public LoginWindow()
         {
             InitializeComponent();
-            ConfigHelper.Instance.SetLang("cz");
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (PasswordBox.Template.FindName("PART_TextBox", PasswordBox) is TextBox textBox)
-            {
-                textBox.Foreground = Brushes.White;
-                textBox.CaretBrush = Brushes.White;
-            }
-        }
-
-        //---------------------------------------------------------------------------\\
-        //                          User Authentication                              \\
-        //---------------------------------------------------------------------------\\
 
         public static string name = string.Empty;
         public static string surname = string.Empty;
@@ -48,7 +32,7 @@ namespace ZlabGrade
                 {
                     dataReader.Read();
 
-                    WrongCredentialsLabel.Visibility = Visibility.Hidden;
+                    WarningLabel.Visibility = Visibility.Hidden;
 
                     name = dataReader["jmeno"].ToString();
                     surname = dataReader["prijmeni"].ToString();
@@ -61,6 +45,7 @@ namespace ZlabGrade
                             VedeniWindow vedeniWindow = new();
                             this.Close();
                             vedeniWindow.Show();
+                            mySqlConnection.Close();
                             break;
 
                         case "Učitel":
@@ -68,6 +53,7 @@ namespace ZlabGrade
                             UcitelWindow ucitelWindow = new();
                             this.Close();
                             ucitelWindow.Show();
+                            mySqlConnection.Close();
                             break;
 
                         case "Student":
@@ -77,19 +63,18 @@ namespace ZlabGrade
                             StudentWindow studentWindow = new();
                             this.Close();
                             studentWindow.Show();
+                            mySqlConnection.Close();
                             break;
                     }
                 }
                 else
                 {
-                    WrongCredentialsLabel.Visibility = Visibility.Visible;
+                    WarningLabel.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception exception)
             {
-                ConnectionErrorLabel.Visibility = Visibility.Visible;
-
-                Console.WriteLine("ERROR: " + exception.Message);
+                MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

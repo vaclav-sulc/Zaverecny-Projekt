@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
+﻿using MySql.Data.MySqlClient;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages.Management
@@ -13,7 +13,7 @@ namespace ZlabGrade.Pages.Management
             InitializeComponent();
         }
 
-        BindingList<User> userList = [];
+        readonly BindingList<User> userList = [];
         private bool creatingNewUser = false;
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -43,6 +43,8 @@ namespace ZlabGrade.Pages.Management
                 {
                     WarningText.Visibility = Visibility.Visible;
                 }
+
+                mySqlConnection.Close();
             }
             catch (Exception exception)
             {
@@ -82,7 +84,7 @@ namespace ZlabGrade.Pages.Management
 
         private void DeleteUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (UserList.SelectedItem != null)
+            if (UserList.SelectedItem != null && UserList.Visibility == Visibility.Visible)
             {
                 if (MessageBox.Show("Opravdu si přejete smazat tohoto uživatele? Tato akce je nevratná!", "Smazat uživatele", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
@@ -96,6 +98,8 @@ namespace ZlabGrade.Pages.Management
                         command.ExecuteNonQuery();
 
                         userList.RemoveAt(UserList.SelectedIndex);
+
+                        mySqlConnection.Close();
                     }
                     catch (Exception exception)
                     {
@@ -107,46 +111,88 @@ namespace ZlabGrade.Pages.Management
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            using MySqlConnection mySqlConnection = new(Database.loginString);
-            try
+            if (!string.IsNullOrWhiteSpace(NameTextBox.Text) && !string.IsNullOrWhiteSpace(SurnameTextBox.Text) && !string.IsNullOrWhiteSpace(LoginTextBox.Text))
             {
-                mySqlConnection.Open();
-
-                string sqlQuery;
-
-                if (creatingNewUser)
+                WarningLabel.Visibility = Visibility.Hidden;
+                
+                using MySqlConnection mySqlConnection = new(Database.loginString);
+                try
                 {
-                    sqlQuery = "INSERT INTO Credentials (jmeno, prijmeni, login, heslo, role, trida) VALUES (@name, @surname, @login, @password, @role, @classroom)";
+                    mySqlConnection.Open();
+
+                    string sqlQuery;
+
+                    if (creatingNewUser)
+                    {
+                        if (!string.IsNullOrWhiteSpace(PasswordBox.Password))
+                        {
+                            sqlQuery = "INSERT INTO Credentials (jmeno, prijmeni, login, heslo, role, trida) VALUES (@name, @surname, @login, @password, @role, @classroom)";
+                        }
+                        else
+                        {
+                            WarningLabel.Visibility = Visibility.Visible;
+                            mySqlConnection.Close();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (string.IsNullOrWhiteSpace(PasswordBox.Password))
+                        {
+                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserList.SelectedIndex].userID}";
+                        }
+                        else
+                        {
+                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserList.SelectedIndex].userID}";
+                        }
+                    }
+
+                    MySqlCommand command = new(sqlQuery, mySqlConnection);
+
+                    command.Parameters.AddWithValue("@name", NameTextBox.Text);
+                    command.Parameters.AddWithValue("@surname", SurnameTextBox.Text);
+                    command.Parameters.AddWithValue("@login", LoginTextBox.Text);
+                    command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(PasswordBox.Password));
+                    command.Parameters.AddWithValue("@role", RoleComboBox.Text);
+                    command.Parameters.AddWithValue("@classroom", ClassroomTextBox.Text);
+
+                    command.ExecuteNonQuery();
+
+                    if (creatingNewUser)
+                    {
+                        MessageBox.Show("Uživatel byl úspěšně vytvořen", "Založení uživatele", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Změny byly úspěšně uloženy", "Úprava uživatele", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                    mySqlConnection.Close();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                WarningLabel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void RoleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /*if (UserTextBoxes.Visibility == Visibility.Visible)
+            {
+                if (RoleComboBox.SelectedItem.ToString() == "Student")
+                {
+                    ClassroomTextBox.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserList.SelectedIndex].userID}";
+                    ClassroomTextBox.Visibility = Visibility.Hidden;
                 }
-
-                MySqlCommand command = new(sqlQuery, mySqlConnection);
-
-                command.Parameters.AddWithValue("@name", NameTextBox.Text);
-                command.Parameters.AddWithValue("@surname", SurnameTextBox.Text);
-                command.Parameters.AddWithValue("@login", LoginTextBox.Text);
-                command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(PasswordBox.Password));
-                command.Parameters.AddWithValue("@role", "Student");
-                command.Parameters.AddWithValue("@classroom", ClassroomTextBox.Text);
-
-                command.ExecuteNonQuery();
-
-                if (creatingNewUser)
-                {
-                    MessageBox.Show("Uživatel byl úspěšně vytvořen", "Založení uživatele", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Změny byly úspěšně uloženy", "Úprava uživatele", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            }*/
         }
 
         public class User(int userID, string name, string surname, string login, string role, string classroom)

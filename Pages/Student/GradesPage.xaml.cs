@@ -1,6 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using MySql.Data.MySqlClient;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade
@@ -12,9 +12,9 @@ namespace ZlabGrade
             InitializeComponent();
         }
 
-        private async void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            List<String> Predmety = new List<String>();
+            List<String> Predmety = [];
 
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
@@ -37,10 +37,11 @@ namespace ZlabGrade
                     }
                 }
 
+                mySqlConnection.Close();
             }
             catch (Exception exception)
             {
-                Console.WriteLine("ERROR: " + exception.Message);
+                MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             PredmetyComboBox.ItemsSource = Predmety;
@@ -80,6 +81,8 @@ namespace ZlabGrade
                 {
                     Znamky.Items.Clear();
                 }
+
+                mySqlConnection.Close();
             }
             catch (Exception exception)
             {

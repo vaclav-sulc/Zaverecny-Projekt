@@ -12,7 +12,7 @@ namespace ZlabGrade.Pages.Student
             InitializeComponent();
         }
 
-        List<Subject> subjects = [];
+        readonly List<Subject> subjects = [];
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -41,6 +41,8 @@ namespace ZlabGrade.Pages.Student
                 {
                     WarningText.Visibility = Visibility.Visible;
                 }
+
+                mySqlConnection.Close();
             }
             catch (Exception exception)
             {
