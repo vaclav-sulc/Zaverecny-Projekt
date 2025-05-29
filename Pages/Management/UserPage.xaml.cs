@@ -1,7 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using MySql.Data.MySqlClient;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages.Management
@@ -13,7 +12,7 @@ namespace ZlabGrade.Pages.Management
             InitializeComponent();
         }
 
-        readonly BindingList<User> userList = [];
+        readonly List<User> userList = [];
         private bool creatingNewUser = false;
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -30,6 +29,7 @@ namespace ZlabGrade.Pages.Management
                 if (dataReader.HasRows)
                 {
                     WarningText.Visibility = Visibility.Hidden;
+                    userList.Clear();
 
                     while (dataReader.Read())
                     {
@@ -37,7 +37,7 @@ namespace ZlabGrade.Pages.Management
                         userList.Add(user);
                     }
 
-                    UserList.ItemsSource = userList;
+                    UserDataGrid.ItemsSource = userList;
                 }
                 else
                 {
@@ -55,7 +55,7 @@ namespace ZlabGrade.Pages.Management
         private void NewUserButton_Click(object sender, RoutedEventArgs e)
         {
             UserTextBoxes.Visibility = Visibility.Visible;
-            UserList.Visibility = Visibility.Hidden;
+            UserDataGrid.Visibility = Visibility.Hidden;
 
             NameTextBox.Text = string.Empty;
             SurnameTextBox.Text = string.Empty;
@@ -68,15 +68,28 @@ namespace ZlabGrade.Pages.Management
 
         private void EditUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (UserList.SelectedItem != null)
+            if (UserDataGrid.SelectedItem != null)
             {
                 UserTextBoxes.Visibility = Visibility.Visible;
-                UserList.Visibility = Visibility.Hidden;
+                UserDataGrid.Visibility = Visibility.Hidden;
 
-                NameTextBox.Text = userList[UserList.SelectedIndex].name;
-                SurnameTextBox.Text = userList[UserList.SelectedIndex].surname;
-                LoginTextBox.Text = userList[UserList.SelectedIndex].login;
-                ClassroomTextBox.Text = userList[UserList.SelectedIndex].classroom;
+                NameTextBox.Text = userList[UserDataGrid.SelectedIndex].Name;
+                SurnameTextBox.Text = userList[UserDataGrid.SelectedIndex].Surname;
+                LoginTextBox.Text = userList[UserDataGrid.SelectedIndex].Login;
+                ClassroomTextBox.Text = userList[UserDataGrid.SelectedIndex].Classroom;
+
+                switch (userList[UserDataGrid.SelectedIndex].Role)
+                {
+                    case "Student":
+                        RoleComboBox.SelectedIndex = 0;
+                        break;
+                    case "Učitel":
+                        RoleComboBox.SelectedIndex = 1;
+                        break;
+                    case "Vedení":
+                        RoleComboBox.SelectedIndex = 2;
+                        break;
+                }
 
                 creatingNewUser = false;
             }
@@ -84,7 +97,7 @@ namespace ZlabGrade.Pages.Management
 
         private void DeleteUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (UserList.SelectedItem != null && UserList.Visibility == Visibility.Visible)
+            if (UserDataGrid.SelectedItem != null && UserDataGrid.Visibility == Visibility.Visible)
             {
                 if (MessageBox.Show("Opravdu si přejete smazat tohoto uživatele? Tato akce je nevratná!", "Smazat uživatele", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
@@ -93,11 +106,11 @@ namespace ZlabGrade.Pages.Management
                     {
                         mySqlConnection.Open();
 
-                        string sqlQuery = $"DELETE FROM Credentials WHERE id_uzivatele = {userList[UserList.SelectedIndex].userID}";
+                        string sqlQuery = $"DELETE FROM Credentials WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
                         MySqlCommand command = new(sqlQuery, mySqlConnection);
                         command.ExecuteNonQuery();
 
-                        userList.RemoveAt(UserList.SelectedIndex);
+                        userList.RemoveAt(UserDataGrid.SelectedIndex);
 
                         mySqlConnection.Close();
                     }
@@ -111,6 +124,12 @@ namespace ZlabGrade.Pages.Management
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (RoleComboBox.SelectedIndex == 0 && string.IsNullOrWhiteSpace(ClassroomTextBox.Text))
+            {
+                WarningLabel.Visibility = Visibility.Visible;
+                return;
+            }
+
             if (!string.IsNullOrWhiteSpace(NameTextBox.Text) && !string.IsNullOrWhiteSpace(SurnameTextBox.Text) && !string.IsNullOrWhiteSpace(LoginTextBox.Text))
             {
                 WarningLabel.Visibility = Visibility.Hidden;
@@ -139,11 +158,11 @@ namespace ZlabGrade.Pages.Management
                     {
                         if (string.IsNullOrWhiteSpace(PasswordBox.Password))
                         {
-                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserList.SelectedIndex].userID}";
+                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
                         }
                         else
                         {
-                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserList.SelectedIndex].userID}";
+                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
                         }
                     }
 
@@ -173,6 +192,10 @@ namespace ZlabGrade.Pages.Management
                 {
                     MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
+                Page_Loaded(null, null);
+                UserTextBoxes.Visibility = Visibility.Hidden;
+                UserDataGrid.Visibility = Visibility.Visible;
             }
             else
             {
@@ -182,9 +205,9 @@ namespace ZlabGrade.Pages.Management
 
         private void RoleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*if (UserTextBoxes.Visibility == Visibility.Visible)
+            if (ClassroomTextBox != null)
             {
-                if (RoleComboBox.SelectedItem.ToString() == "Student")
+                if (RoleComboBox.SelectedIndex == 0)
                 {
                     ClassroomTextBox.Visibility = Visibility.Visible;
                 }
@@ -192,22 +215,17 @@ namespace ZlabGrade.Pages.Management
                 {
                     ClassroomTextBox.Visibility = Visibility.Hidden;
                 }
-            }*/
+            }
         }
 
         public class User(int userID, string name, string surname, string login, string role, string classroom)
         {
-            public int userID = userID;
-            public string name = name;
-            public string surname = surname;
-            public string login = login;
-            public string role = role;
-            public string classroom = classroom;
-
-            public override string ToString()
-            {
-                return $"{userID}   {name} {surname}   {role}   {classroom}";
-            }
+            public int UserID { get; set; } = userID;
+            public string Name { get; set; } = name;
+            public string Surname { get; set; } = surname;
+            public string Login { get; set; } = login;
+            public string Role { get; set; } = role;
+            public string Classroom { get; set; } = classroom;
         }
     }
 }

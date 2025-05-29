@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using ZlabGrade.Pages;
 using ZlabGrade.Pages.Student;
 
@@ -33,6 +34,32 @@ namespace ZlabGrade
             ContentFrame.Navigate(new NoticeboardPage());
         }
 
+        private void NonClientBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else
+                WindowState = WindowState.Maximized;
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new();
+            this.Close();
+            loginWindow.Show();
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+            => WindowState = WindowState.Minimized;
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+            => Close();
         private void GradesButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new GradesPage());
