@@ -3,122 +3,164 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:hc="https://handyorg.github.io/handycontrol">
 
-    <SolidColorBrush x:Key="RowHoverBrush"   Color="#FFCC62DE"/> <!-- light purple  -->
+    <SolidColorBrush x:Key="RowHoverBrush" Color="#FFCC62DE" />
+    <!--  light purple  -->
 
-    <Style x:Key="MyDataGridCell"
-       TargetType="DataGridCell"
-          BasedOn="{StaticResource DataGridCellStyle}">
+    <Style
+        x:Key="MyDataGridCell"
+        BasedOn="{StaticResource DataGridCellStyle}"
+        TargetType="DataGridCell">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="Purple"/>
+                <Setter Property="Background" Value="Purple" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MyDataGridColumnHeader"
-           TargetType="DataGridColumnHeader"
-              BasedOn="{StaticResource DataGridColumnHeaderStyle}">
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Margin" Value="0,10,0,10"/>
-        <Setter Property="Padding" Value="8,4"/>
-        <Setter Property="hc:BorderElement.CornerRadius" Value="30"/>
+    <Style
+        x:Key="MyDataGridColumnHeader"
+        BasedOn="{StaticResource DataGridColumnHeaderStyle}"
+        TargetType="DataGridColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="0,10,0,10" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="hc:BorderElement.CornerRadius" Value="30" />
 
         <Style.Resources>
-            <SolidColorBrush x:Key="PrimaryBrush" Color="White"/>
+            <SolidColorBrush x:Key="PrimaryBrush" Color="White" />
         </Style.Resources>
-        
+
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}" />
             </Trigger>
             <Trigger Property="SortDirection" Value="Ascending">
-                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}" />
             </Trigger>
             <Trigger Property="SortDirection" Value="Descending">
-                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource RowHoverBrush}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <!-- TS PISSED ME OFF SM  -->
-    <Style x:Key="MyDataGridRowStyle"
-           TargetType="DataGridRow"
-           BasedOn="{StaticResource DataGridRowStyle}">
+    <Style BasedOn="{StaticResource {x:Type hc:PasswordBox}}" TargetType="hc:PasswordBox">
 
-        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        <Style.Resources>
+            <SolidColorBrush x:Key="PrimaryBrush" Color="White" />
+        </Style.Resources>
+
+
+    </Style>
+
+    <Style x:Key="CaptionBtn" TargetType="Button">
+        <Setter Property="Width" Value="38" />
+        <Setter Property="Height" Value="38" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SecondaryRegionBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#6A0080" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--  TS PISSED ME OFF SM  -->
+    <Style
+        x:Key="MyDataGridRowStyle"
+        BasedOn="{StaticResource DataGridRowStyle}"
+        TargetType="DataGridRow">
+
+        <Setter Property="TextBlock.TextAlignment" Value="Center" />
 
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="Purple"/>
+                <Setter Property="Background" Value="Purple" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="Skibidi"
-           TargetType="DataGrid"
-           BasedOn="{StaticResource {x:Type DataGrid}}">
-        <Setter Property="RowStyle" Value="{StaticResource MyDataGridRowStyle}"/>
-        <Setter Property="ColumnHeaderStyle" Value="{StaticResource MyDataGridColumnHeader}"/>
-        <Setter Property="CellStyle" Value="{StaticResource MyDataGridCell}"/>
-        <Setter Property="BorderBrush" Value="Purple"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="CanUserResizeColumns" Value="False"/>
+    <Style
+        x:Key="Skibidi"
+        BasedOn="{StaticResource {x:Type DataGrid}}"
+        TargetType="DataGrid">
+        <Setter Property="RowStyle" Value="{StaticResource MyDataGridRowStyle}" />
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource MyDataGridColumnHeader}" />
+        <Setter Property="CellStyle" Value="{StaticResource MyDataGridCell}" />
+        <Setter Property="BorderBrush" Value="Purple" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CanUserResizeColumns" Value="False" />
 
     </Style>
 
 
-    <Style x:Key="PurpleListItem"
-       TargetType="ComboBoxItem"
-       BasedOn="{StaticResource ListBoxItemBaseStyle}">
+    <Style
+        x:Key="PurpleListItem"
+        BasedOn="{StaticResource ListBoxItemBaseStyle}"
+        TargetType="ComboBoxItem">
 
-        <Setter Property="Padding"    Value="6,3"/>
+        <Setter Property="Padding" Value="6,3" />
 
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="Purple"/>
+                <Setter Property="Background" Value="Purple" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MyListBoxItem"
-            TargetType="ListBoxItem"
-           BasedOn="{StaticResource ListBoxItemBaseStyle}">
+    <Style
+        x:Key="MyListBoxItem"
+        BasedOn="{StaticResource ListBoxItemBaseStyle}"
+        TargetType="ListBoxItem">
 
         <Style.Triggers>
             <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Background" Value="Purple"/>
+                <Setter Property="Background" Value="Purple" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-        <Style TargetType="ListBox"
-       BasedOn="{StaticResource {x:Type ListBox}}">
-        <Setter Property="ItemContainerStyle" Value="{StaticResource MyListBoxItem}"/>
+    <Style BasedOn="{StaticResource {x:Type ListBox}}" TargetType="ListBox">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource MyListBoxItem}" />
     </Style>
 
-    <Style x:Key="MyComboBox"
-       TargetType="hc:ComboBox"
-       BasedOn="{StaticResource {x:Type hc:ComboBox}}">
+    <Style
+        x:Key="MyComboBox"
+        BasedOn="{StaticResource {x:Type hc:ComboBox}}"
+        TargetType="hc:ComboBox">
 
-        <Setter Property="BorderBrush" Value="Purple"/>
-        <Setter Property="SelectionBrush" Value="{DynamicResource RowHoverBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="8,4"/>
-        <Setter Property="hc:BorderElement.CornerRadius" Value="6"/>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource PurpleListItem}"/>
+        <Setter Property="BorderBrush" Value="Purple" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource RowHoverBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="hc:BorderElement.CornerRadius" Value="6" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource PurpleListItem}" />
 
 
-        <!-- triggery -->
         <Style.Triggers>
-            <!-- rozbalený stav -->
+            <!--  rozbalený stav  -->
             <Trigger Property="IsDropDownOpen" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-                <Setter Property="BorderBrush" Value="Purple"/>
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="BorderBrush" Value="Purple" />
             </Trigger>
             <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderBrush" Value="Purple"/>
+                <Setter Property="BorderBrush" Value="Purple" />
             </Trigger>
         </Style.Triggers>
     </Style>

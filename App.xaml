@@ -1,15 +1,16 @@
-﻿<Application x:Class="ZlabGrade.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ZlabGrade"
-             StartupUri="/Windows/LoginWindow.xaml"
-             xmlns:hc="https://handyorg.github.io/handycontrol">
+﻿<Application
+    x:Class="ZlabGrade.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:ZlabGrade"
+    StartupUri="/Windows/StudentWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <hc:ThemeResources RequestedTheme="Dark"/>
-                <hc:Theme/>
-                <ResourceDictionary Source="Styles/HandyDataGrid.xaml"/>
+                <hc:ThemeResources RequestedTheme="Dark" />
+                <hc:Theme />
+                <ResourceDictionary Source="Styles/HandyDataGrid.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

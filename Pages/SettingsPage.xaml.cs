@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using MySql.Data.MySqlClient;
 using ZlabGrade.Scripts;
 
@@ -22,15 +21,17 @@ namespace ZlabGrade.Pages
                 {
                     mySqlConnection.Open();
 
-                    string sqlQuery = $"UPDATE Credentials SET heslo = @NewPassword WHERE id_uzivatele = {LoginWindow.userID}";
+                    string sqlQuery = $"UPDATE Credentials SET heslo = @password WHERE id_uzivatele = {LoginWindow.userID}";
                     MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                    command.Parameters.AddWithValue("@NewPassword", Database.GetStringSha256Hash(NewPasswordBox.Password));
+                    command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(NewPasswordBox.Password));
 
                     command.ExecuteNonQuery();
 
                     WarningLabel.Visibility = Visibility.Hidden;
-                    SuccessfulLabel.Visibility = Visibility.Visible;
+                    MessageBox.Show("Heslo bylo úspěšně změněno", "Změna hesla", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    mySqlConnection.Close();
                 }
                 catch (Exception exception)
                 {
@@ -39,7 +40,6 @@ namespace ZlabGrade.Pages
             }
             else
             {
-                SuccessfulLabel.Visibility = Visibility.Hidden;
                 WarningLabel.Visibility = Visibility.Visible;
             }
         }
