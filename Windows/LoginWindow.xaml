@@ -9,13 +9,31 @@
         Icon="/Images/ŽlabGrade - Logo Mini.png"
         Title="ŽlabGrade" Width="400" Height="450" ResizeMode="CanMinimize" Background="Transparent">
     <Grid>
-        <Image Source="/Images/ŽlabGrade - Logo.png" HorizontalAlignment="Center" Margin="0,-110,0,0" VerticalAlignment="Top" Height="500"/>
+        <Image
+            Height="500"
+            Margin="0,-110,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Source="/Images/ŽlabGrade - Logo.png" />
 
         <hc:TextBox x:Name="LoginTextBox" HorizontalAlignment="Center" Margin="0,180,0,0" hc:InfoElement.Placeholder="Uživatelské jméno" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
         <hc:PasswordBox x:Name="PasswordBox" HorizontalAlignment="Center" Margin="0,225,0,0" hc:InfoElement.Placeholder="Heslo" VerticalAlignment="Top" Width="330" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0" ShowEyeButton="True"/>
 
         <Label x:Name="WarningLabel" Content="Zadán neplatný login nebo heslo!" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,275,0,0" VerticalAlignment="Top" Height="30" FontSize="14" FontWeight="Bold" Background="#d12424" Foreground="White" BorderThickness="0"/>
 
-        <Button x:Name="LoginButton" Content="Přihlásit se" Margin="0,350,0,0" VerticalAlignment="Top" Width="330" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" Click="LoginButton_Click"/>
+        <Button
+            x:Name="LoginButton"
+            Width="330"
+            Height="35"
+            Margin="0,350,0,0"
+            VerticalAlignment="Top"
+            Background="Purple"
+            BorderThickness="0"
+            Click="LoginButton_Click"
+            Content="Přihlásit se"
+            FontFamily="Calibri"
+            FontSize="20"
+            FontWeight="Bold"
+            Foreground="White" />
     </Grid>
 </hc:Window>

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using HandyControl.Controls;
+using System.Windows;
+using System.Windows.Input;
 using ZlabGrade.Pages;
 using ZlabGrade.Pages.Student;
 
@@ -13,7 +15,7 @@ namespace ZlabGrade
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            NameButton.Content = $"{LoginWindow.name} {LoginWindow.surname}, {LoginWindow.classroom}";
+            Info.Text = $"{LoginWindow.name} {LoginWindow.surname}, {LoginWindow.classroom}";
         }
 
         private void NameButton_Click(object sender, RoutedEventArgs e)
@@ -22,6 +24,18 @@ namespace ZlabGrade
             this.Close();
             loginWindow.Show();
         }
+
+        private void NonClientBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+            => WindowState = WindowState.Minimized;
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+            => Close();
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +57,14 @@ namespace ZlabGrade
             ContentFrame.Navigate(new SchedulePage());
         }
 
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else
+                WindowState = WindowState.Maximized;
+        }
+
         private void AbsenceButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new AbsencePage());
@@ -51,6 +73,13 @@ namespace ZlabGrade
         private void SubjectsButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new SubjectsPage());
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new();
+            this.Close();
+            loginWindow.Show();
         }
     }
 }
