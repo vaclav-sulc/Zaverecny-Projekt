@@ -12,6 +12,7 @@
     Background="Transparent"
     Icon="/Images/ŽlabGrade - Logo Mini.png"
     ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
         <Image

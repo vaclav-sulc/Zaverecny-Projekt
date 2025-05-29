@@ -72,11 +72,6 @@ namespace ZlabGrade
             loginWindow.Show();
         }
 
-        private void AbsenceButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentFrame.Navigate(new AbsencePage());
-        }
-
         private void SubjectsButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new SubjectsPage());
