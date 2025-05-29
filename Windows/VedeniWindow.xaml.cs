@@ -1,7 +1,8 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using ZlabGrade.Pages;
-using ZlabGrade.Pages.Student;
 using ZlabGrade.Pages.Management;
+using ZlabGrade.Pages.Student;
 
 namespace ZlabGrade
 {
@@ -23,6 +24,33 @@ namespace ZlabGrade
             this.Close();
             loginWindow.Show();
         }
+
+        private void NonClientBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else
+                WindowState = WindowState.Maximized;
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new();
+            this.Close();
+            loginWindow.Show();
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+            => WindowState = WindowState.Minimized;
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+            => Close();
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
