@@ -65,6 +65,13 @@ namespace ZlabGrade
                 WindowState = WindowState.Maximized;
         }
 
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new();
+            this.Close();
+            loginWindow.Show();
+        }
+
         private void AbsenceButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new AbsencePage());
@@ -73,13 +80,6 @@ namespace ZlabGrade
         private void SubjectsButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new SubjectsPage());
-        }
-
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-            LoginWindow loginWindow = new();
-            this.Close();
-            loginWindow.Show();
         }
     }
 }
