@@ -12,8 +12,6 @@ namespace ZlabGrade.Pages.Student
             InitializeComponent();
         }
 
-        readonly List<Subject> subjects = [];
-
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             using MySqlConnection mySqlConnection = new(Database.loginString);
