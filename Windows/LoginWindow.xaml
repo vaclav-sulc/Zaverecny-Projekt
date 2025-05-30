@@ -62,9 +62,8 @@
 
         <Button
             x:Name="LoginButton"
-            Width="330"
-            Height="35"
-            Margin="0,350,0,0"
+            Height="34"
+            Margin="100,342,100,0"
             VerticalAlignment="Top"
             Background="Purple"
             BorderThickness="0"

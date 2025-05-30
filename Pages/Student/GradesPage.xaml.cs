@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade
@@ -12,22 +12,22 @@ namespace ZlabGrade
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             List<String> Predmety = [];
 
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
-                mySqlConnection.Open();
+                await mySqlConnection.OpenAsync();
 
                 string sqlQuery = $"SELECT predmet FROM Grades";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                using MySqlDataReader dataReader = command.ExecuteReader();
+                using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
                 {
-                    while (dataReader.Read())
+                    while (await dataReader.ReadAsync())
                     {
                         string predmet = dataReader["predmet"].ToString();
                         if (!Predmety.Contains(predmet))
@@ -48,12 +48,12 @@ namespace ZlabGrade
             PredmetyComboBox.SelectedIndex = 0;
         }
 
-        private void PredmetyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void PredmetyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
-                mySqlConnection.Open();
+                await mySqlConnection.OpenAsync();
 
                 string sqlQuery = @"SELECT popis, datum, znamka, vaha FROM Grades WHERE predmet = @predmet AND id_zaka = @userID";
 
@@ -62,11 +62,11 @@ namespace ZlabGrade
                 command.Parameters.AddWithValue("@userID", LoginWindow.userID);
 
 
-                using MySqlDataReader dataReader = command.ExecuteReader();
+                using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
                 {
                     Znamky.Items.Clear();
-                    while (dataReader.Read())
+                    while (await dataReader.ReadAsync())
                     {
                         Znamky.Items.Add(new
                         {

@@ -17,6 +17,63 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="Button">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="Purple" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid ClipToBounds="True">
+                        <Border Background="Purple" CornerRadius="8" />
+                        <Ellipse
+                            x:Name="Ripple"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            Fill="Gray"
+                            Opacity="0"
+                            RenderTransformOrigin="0.5,0.5">
+                            <Ellipse.RenderTransform>
+                                <ScaleTransform x:Name="RippleScale" ScaleX="0" ScaleY="0" />
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="RippleScale"
+                                            Storyboard.TargetProperty="ScaleX"
+                                            From="0"
+                                            To="2"
+                                            Duration="0:0:0.4" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="RippleScale"
+                                            Storyboard.TargetProperty="ScaleY"
+                                            From="0"
+                                            To="4"
+                                            Duration="0:0:0.4" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Ripple"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0.9"
+                                            To="0"
+                                            Duration="0:0:0.5" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style
         x:Key="MyDataGridColumnHeader"
         BasedOn="{StaticResource DataGridColumnHeaderStyle}"

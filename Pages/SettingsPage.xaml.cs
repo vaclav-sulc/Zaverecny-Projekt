@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages
@@ -12,21 +12,21 @@ namespace ZlabGrade.Pages
             InitializeComponent();
         }
 
-        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        private async void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
             if (NewPasswordBox.Password == ConfirmNewPasswordBox.Password && !string.IsNullOrEmpty(NewPasswordBox.Password))
             {
                 using MySqlConnection mySqlConnection = new(Database.loginString);
                 try
                 {
-                    mySqlConnection.Open();
+                    await mySqlConnection.OpenAsync();
 
                     string sqlQuery = $"UPDATE Credentials SET heslo = @password WHERE id_uzivatele = {LoginWindow.userID}";
                     MySqlCommand command = new(sqlQuery, mySqlConnection);
 
                     command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(NewPasswordBox.Password));
 
-                    command.ExecuteNonQuery();
+                    await command.ExecuteNonQueryAsync();
 
                     WarningLabel.Visibility = Visibility.Hidden;
                     MessageBox.Show("Heslo bylo úspěšně změněno", "Změna hesla", MessageBoxButton.OK, MessageBoxImage.Information);

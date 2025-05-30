@@ -14,7 +14,7 @@ namespace ZlabGrade
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            NameButton.Content = $"{LoginWindow.name} {LoginWindow.surname}";
+           Info.Text = $"{LoginWindow.name} {LoginWindow.surname}";
         }
 
         private void NameButton_Click(object sender, RoutedEventArgs e)

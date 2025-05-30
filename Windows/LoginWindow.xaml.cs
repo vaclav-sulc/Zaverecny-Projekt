@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade
@@ -17,20 +17,20 @@ namespace ZlabGrade
         public static string classroom = string.Empty;
         public static int userID;
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
-                mySqlConnection.Open();
+                await mySqlConnection.OpenAsync();
 
                 string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{Database.GetStringSha256Hash(PasswordBox.Password)}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
                 
-                using MySqlDataReader dataReader = command.ExecuteReader();
+                using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
                 {
-                    dataReader.Read();
+                    await dataReader.ReadAsync();
 
                     WarningLabel.Visibility = Visibility.Hidden;
 
@@ -45,7 +45,6 @@ namespace ZlabGrade
                             VedeniWindow vedeniWindow = new();
                             this.Close();
                             vedeniWindow.Show();
-                            mySqlConnection.Close();
                             break;
 
                         case "Učitel":
@@ -53,7 +52,6 @@ namespace ZlabGrade
                             UcitelWindow ucitelWindow = new();
                             this.Close();
                             ucitelWindow.Show();
-                            mySqlConnection.Close();
                             break;
 
                         case "Student":
@@ -63,9 +61,10 @@ namespace ZlabGrade
                             StudentWindow studentWindow = new();
                             this.Close();
                             studentWindow.Show();
-                            mySqlConnection.Close();
                             break;
                     }
+
+                    mySqlConnection.Close();
                 }
                 else
                 {
