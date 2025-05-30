@@ -24,7 +24,7 @@ namespace ZlabGrade
             {
                 mySqlConnection.Open();
 
-                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{Database.GetStringSha256Hash(PasswordBox.Password)}\"";
+                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{Database.GetSha256Hash(PasswordBox.Password)}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
                 
                 using MySqlDataReader dataReader = command.ExecuteReader();
@@ -33,6 +33,7 @@ namespace ZlabGrade
                     dataReader.Read();
 
                     WarningLabel.Visibility = Visibility.Hidden;
+                    ConnectionErrorLabel.Visibility = Visibility.Hidden;
 
                     name = dataReader["jmeno"].ToString();
                     surname = dataReader["prijmeni"].ToString();
@@ -72,9 +73,9 @@ namespace ZlabGrade
                     WarningLabel.Visibility = Visibility.Visible;
                 }
             }
-            catch (Exception exception)
+            catch
             {
-                MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                ConnectionErrorLabel.Visibility = Visibility.Visible;
             }
         }
     }

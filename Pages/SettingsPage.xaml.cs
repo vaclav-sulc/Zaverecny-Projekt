@@ -24,7 +24,7 @@ namespace ZlabGrade.Pages
                     string sqlQuery = $"UPDATE Credentials SET heslo = @password WHERE id_uzivatele = {LoginWindow.userID}";
                     MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                    command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(NewPasswordBox.Password));
+                    command.Parameters.AddWithValue("@password", Database.GetSha256Hash(NewPasswordBox.Password));
 
                     command.ExecuteNonQuery();
 
