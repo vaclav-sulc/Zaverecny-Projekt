@@ -125,44 +125,10 @@
             <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
 
-        <Label
+        <Border
+            Grid.Row="0"
             Grid.ColumnSpan="2"
-            Width="810"
-            Height="48"
-            HorizontalContentAlignment="Left"
-            Background="Purple"
-            BorderThickness="0" />
-        <Button
-            x:Name="NameButton"
-            Grid.ColumnSpan="2"
-            Height="35"
-            Margin="5,7,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="NameButton_Click"
-            Content="Jméno Příjmení"
-            FontFamily="Calibri"
-            FontSize="20"
-            FontWeight="Bold"
-            Foreground="White" />
-        <Button
-            x:Name="SettingsButton"
-            Grid.Column="1"
-            Width="110"
-            Height="35"
-            Margin="0,7,0,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="SettingsButton_Click"
-            Content="Nastavení"
-            FontFamily="Calibri"
-            FontSize="20"
-            FontWeight="Bold"
-            Foreground="White" />
+            Background="Purple" />
 
         <Button
             x:Name="NoticeboardButton"
@@ -171,14 +137,10 @@
             Height="35"
             Margin="0,120,0,0"
             VerticalAlignment="Top"
-            Background="Purple"
-            BorderThickness="0"
             Click="NoticeboardButton_Click"
             Content="Nástěnka"
             FontFamily="Calibri"
-            FontSize="20"
-            FontWeight="Bold"
-            Foreground="White" />
+            FontSize="20" />
         <Button
             x:Name="SchedulesButton"
             Grid.Row="1"
@@ -186,14 +148,10 @@
             Height="35"
             Margin="0,160,0,0"
             VerticalAlignment="Top"
-            Background="Purple"
-            BorderThickness="0"
             Click="SchedulesButton_Click"
             Content="Rozvrhy"
             FontFamily="Calibri"
-            FontSize="20"
-            FontWeight="Bold"
-            Foreground="White" />
+            FontSize="20" />
         <Button
             x:Name="UsersButton"
             Grid.Row="1"
@@ -201,14 +159,10 @@
             Height="35"
             Margin="0,200,0,0"
             VerticalAlignment="Top"
-            Background="Purple"
-            BorderThickness="0"
             Click="UsersButton_Click"
             Content="Uživatelé"
             FontFamily="Calibri"
-            FontSize="20"
-            FontWeight="Bold"
-            Foreground="White" />
+            FontSize="20" />
 
         <Frame
             x:Name="ContentFrame"

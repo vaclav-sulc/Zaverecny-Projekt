@@ -70,11 +70,7 @@ namespace ZlabGrade
             LoginWindow loginWindow = new();
             this.Close();
             loginWindow.Show();
-        }
-
-        private void AbsenceButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentFrame.Navigate(new AbsencePage());
+            loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void SubjectsButton_Click(object sender, RoutedEventArgs e)

@@ -14,7 +14,7 @@ namespace ZlabGrade
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            NameButton.Content = $"{LoginWindow.name} {LoginWindow.surname}";
+           Info.Text = $"{LoginWindow.name} {LoginWindow.surname}";
         }
 
         private void NameButton_Click(object sender, RoutedEventArgs e)
@@ -68,16 +68,6 @@ namespace ZlabGrade
         private void ScheduleButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new SchedulePage());
-        }
-
-        private void AbsenceButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentFrame.Navigate(new AbsencePage());
-        }
-
-        private void SubjectsButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentFrame.Navigate(new SubjectsPage());
         }
     }
 }

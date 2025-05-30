@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages.Management
@@ -15,23 +15,23 @@ namespace ZlabGrade.Pages.Management
         readonly List<User> userList = [];
         private bool creatingNewUser = false;
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
-                mySqlConnection.Open();
+                await mySqlConnection.OpenAsync();
 
                 string sqlQuery = $"SELECT * FROM Credentials";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                using MySqlDataReader dataReader = command.ExecuteReader();
+                using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
                 {
                     WarningText.Visibility = Visibility.Hidden;
                     userList.Clear();
 
-                    while (dataReader.Read())
+                    while (await dataReader.ReadAsync())
                     {
                         User user = new(Convert.ToInt32(dataReader["id_uzivatele"]), dataReader["jmeno"].ToString(), dataReader["prijmeni"].ToString(), dataReader["login"].ToString(), dataReader["role"].ToString(), dataReader["trida"].ToString());
                         userList.Add(user);
@@ -95,7 +95,7 @@ namespace ZlabGrade.Pages.Management
             }
         }
 
-        private void DeleteUserButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteUserButton_Click(object sender, RoutedEventArgs e)
         {
             if (UserDataGrid.SelectedItem != null && UserDataGrid.Visibility == Visibility.Visible)
             {
@@ -104,11 +104,11 @@ namespace ZlabGrade.Pages.Management
                     using MySqlConnection mySqlConnection = new(Database.loginString);
                     try
                     {
-                        mySqlConnection.Open();
+                        await mySqlConnection.OpenAsync();
 
                         string sqlQuery = $"DELETE FROM Credentials WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
                         MySqlCommand command = new(sqlQuery, mySqlConnection);
-                        command.ExecuteNonQuery();
+                        await command.ExecuteNonQueryAsync();
 
                         userList.RemoveAt(UserDataGrid.SelectedIndex);
 
@@ -122,7 +122,7 @@ namespace ZlabGrade.Pages.Management
             }
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (RoleComboBox.SelectedIndex == 0 && string.IsNullOrWhiteSpace(ClassroomTextBox.Text))
             {
@@ -137,7 +137,7 @@ namespace ZlabGrade.Pages.Management
                 using MySqlConnection mySqlConnection = new(Database.loginString);
                 try
                 {
-                    mySqlConnection.Open();
+                    await mySqlConnection.OpenAsync();
 
                     string sqlQuery;
 
@@ -171,11 +171,11 @@ namespace ZlabGrade.Pages.Management
                     command.Parameters.AddWithValue("@name", NameTextBox.Text);
                     command.Parameters.AddWithValue("@surname", SurnameTextBox.Text);
                     command.Parameters.AddWithValue("@login", LoginTextBox.Text);
-                    command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(PasswordBox.Password));
+                    command.Parameters.AddWithValue("@password", Database.GetSha256Hash(PasswordBox.Password));
                     command.Parameters.AddWithValue("@role", RoleComboBox.Text);
                     command.Parameters.AddWithValue("@classroom", ClassroomTextBox.Text);
 
-                    command.ExecuteNonQuery();
+                    await command.ExecuteNonQueryAsync();
 
                     if (creatingNewUser)
                     {
@@ -214,6 +214,7 @@ namespace ZlabGrade.Pages.Management
                 else
                 {
                     ClassroomTextBox.Visibility = Visibility.Hidden;
+                    ClassroomTextBox.Text = string.Empty;
                 }
             }
         }

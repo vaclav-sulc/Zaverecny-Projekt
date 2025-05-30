@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages.Student
@@ -14,22 +14,22 @@ namespace ZlabGrade.Pages.Student
 
         readonly List<NoticeboardMessage> noticeboardMessages = [];
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
-                mySqlConnection.Open();
+                await mySqlConnection.OpenAsync();
 
                 string sqlQuery = $"SELECT * FROM Noticeboard";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                using MySqlDataReader dataReader = command.ExecuteReader();
+                using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
                 {
                     WarningText.Visibility = Visibility.Hidden;
 
-                    while (dataReader.Read())
+                    while (await dataReader.ReadAsync())
                     {
                         NoticeboardMessage noticeboardMessage = new(dataReader["nadpis"].ToString(), dataReader["zprava"].ToString(), dataReader["autor"].ToString());
                         noticeboardMessages.Add(noticeboardMessage);

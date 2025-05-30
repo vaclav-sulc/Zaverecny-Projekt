@@ -46,14 +46,12 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <ListBox x:Name="UsserList" Visibility="Hidden" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="10,10,10,65" Background="Transparent" BorderThickness="0"/>
-
         <StackPanel x:Name="UserTextBoxes" Visibility="Hidden">
-            <hc:TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="120,20,0,0" hc:InfoElement.Placeholder="Jméno" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
-            <hc:TextBox x:Name="SurnameTextBox" HorizontalAlignment="Left" Margin="330,-35,0,0" hc:InfoElement.Placeholder="Příjmení" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
-            <hc:TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="120,4,0,0" hc:InfoElement.Placeholder="Login" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
+            <hc:TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="120,20,0,0" hc:InfoElement.Placeholder="Jméno" MaxLength="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
+            <hc:TextBox x:Name="SurnameTextBox" HorizontalAlignment="Left" Margin="330,-35,0,0" hc:InfoElement.Placeholder="Příjmení" MaxLength="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
+            <hc:TextBox x:Name="LoginTextBox" HorizontalAlignment="Left" Margin="120,4,0,0" hc:InfoElement.Placeholder="Login" MaxLength="10" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
             <hc:PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="330,-35,0,0" hc:InfoElement.Placeholder="Heslo" Width="200" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0" ShowEyeButton="True"/>
-            <hc:TextBox x:Name="ClassroomTextBox" HorizontalAlignment="Left" Margin="120,4,0,0" hc:InfoElement.Placeholder="Třída" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
+            <hc:TextBox x:Name="ClassroomTextBox" HorizontalAlignment="Left" Margin="120,4,0,0" hc:InfoElement.Placeholder="Třída" MaxLength="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
             <hc:ComboBox x:Name="RoleComboBox" SelectedIndex="0" Style="{StaticResource MyComboBox}" Margin="-15,-35,0,0" Width="200" Height="30" SelectionChanged="RoleComboBox_SelectionChanged">
                 <ComboBoxItem Content="Student"/>
                 <ComboBoxItem Content="Učitel"/>

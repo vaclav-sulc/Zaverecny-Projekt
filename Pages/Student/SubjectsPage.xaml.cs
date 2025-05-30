@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using ZlabGrade.Scripts;
 
 namespace ZlabGrade.Pages.Student
@@ -14,28 +14,30 @@ namespace ZlabGrade.Pages.Student
 
         readonly List<Subject> subjects = [];
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
-                mySqlConnection.Open();
+                await mySqlConnection.OpenAsync();
 
                 string sqlQuery = $"SELECT * FROM Subjects WHERE trida = \"{LoginWindow.classroom}\"";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                using MySqlDataReader dataReader = command.ExecuteReader();
+                using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
                 {
                     WarningText.Visibility = Visibility.Hidden;
+                    SubjectDataGrid.Items.Clear();
 
-                    while (dataReader.Read())
+                    while (await dataReader.ReadAsync())
                     {
-                        Subject subject = new(dataReader["predmet"].ToString(), dataReader["vyucujici"].ToString());
-                        subjects.Add(subject);
+                        SubjectDataGrid.Items.Add(new
+                        {
+                            Subject = dataReader["predmet"].ToString(),
+                            Teacher = dataReader["vyucujici"].ToString()
+                        });
                     }
-
-                    SubjectList.ItemsSource = subjects;
                 }
                 else
                 {
@@ -48,17 +50,6 @@ namespace ZlabGrade.Pages.Student
             {
                 MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-    }
-
-    public class Subject(string name, string teachers)
-    {
-        public string name = name;
-        public string teachers = teachers;
-
-        public override string ToString()
-        {
-            return $"{name}\n{teachers}";
         }
     }
 }
