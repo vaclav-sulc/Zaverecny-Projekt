@@ -171,7 +171,7 @@ namespace ZlabGrade.Pages.Management
                     command.Parameters.AddWithValue("@name", NameTextBox.Text);
                     command.Parameters.AddWithValue("@surname", SurnameTextBox.Text);
                     command.Parameters.AddWithValue("@login", LoginTextBox.Text);
-                    command.Parameters.AddWithValue("@password", Database.GetStringSha256Hash(PasswordBox.Password));
+                    command.Parameters.AddWithValue("@password", Database.GetSha256Hash(PasswordBox.Password));
                     command.Parameters.AddWithValue("@role", RoleComboBox.Text);
                     command.Parameters.AddWithValue("@classroom", ClassroomTextBox.Text);
 
@@ -214,6 +214,7 @@ namespace ZlabGrade.Pages.Management
                 else
                 {
                     ClassroomTextBox.Visibility = Visibility.Hidden;
+                    ClassroomTextBox.Text = string.Empty;
                 }
             }
         }

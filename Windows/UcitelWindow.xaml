@@ -134,7 +134,7 @@
             Grid.Row="1"
             Width="110"
             Height="35"
-            Margin="0,80,0,0"
+            Margin="0,120,0,0"
             VerticalAlignment="Top"
             Click="NoticeboardButton_Click"
             Content="Nástěnka"
@@ -145,7 +145,7 @@
             Grid.Row="1"
             Width="110"
             Height="35"
-            Margin="0,120,0,0"
+            Margin="0,160,0,0"
             VerticalAlignment="Top"
             Click="GradesButton_Click"
             Content="Známky"
@@ -156,34 +156,14 @@
             Grid.Row="1"
             Width="110"
             Height="35"
-            Margin="0,160,0,0"
+            Margin="0,200,0,0"
             VerticalAlignment="Top"
             Click="ScheduleButton_Click"
             Content="Rozvrh"
             FontFamily="Calibri"
-            FontSize="20" />
-        <Button
-            x:Name="AbsenceButton"
-            Grid.Row="1"
-            Width="110"
-            Height="35"
-            Margin="0,200,0,0"
-            VerticalAlignment="Top"
-            Click="AbsenceButton_Click"
-            Content="Absence"
-            FontFamily="Calibri"
-            FontSize="20" />
-        <Button
-            x:Name="SubjectsButton"
-            Grid.Row="1"
-            Width="110"
-            Height="35"
-            Margin="0,240,0,0"
-            VerticalAlignment="Top"
-            Click="SubjectsButton_Click"
-            Content="Předměty"
-            FontFamily="Calibri"
-            FontSize="20" />
+            FontSize="20"
+            FontWeight="Bold"
+            Foreground="White" />
 
         <Frame
             x:Name="ContentFrame"

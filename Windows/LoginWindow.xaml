@@ -12,6 +12,7 @@
     Background="Transparent"
     Icon="/Images/ŽlabGrade - Logo Mini.png"
     ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
         <Image
@@ -55,6 +56,19 @@
             Background="#d12424"
             BorderThickness="0"
             Content="Zadán neplatný login nebo heslo!"
+            FontSize="14"
+            FontWeight="Bold"
+            Foreground="White"
+            Visibility="Hidden" />
+        <Label
+            x:Name="ConnectionErrorLabel"
+            Height="30"
+            Margin="0,275,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="#d12424"
+            BorderThickness="0"
+            Content="Spojení se nezdařilo, zkuste to znovu později"
             FontSize="14"
             FontWeight="Bold"
             Foreground="White"

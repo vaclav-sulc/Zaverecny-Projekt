@@ -28,14 +28,16 @@ namespace ZlabGrade.Pages.Student
                 if (dataReader.HasRows)
                 {
                     WarningText.Visibility = Visibility.Hidden;
+                    SubjectDataGrid.Items.Clear();
 
                     while (await dataReader.ReadAsync())
                     {
-                        Subject subject = new(dataReader["predmet"].ToString(), dataReader["vyucujici"].ToString());
-                        subjects.Add(subject);
+                        SubjectDataGrid.Items.Add(new
+                        {
+                            Subject = dataReader["predmet"].ToString(),
+                            Teacher = dataReader["vyucujici"].ToString()
+                        });
                     }
-
-                    SubjectList.ItemsSource = subjects;
                 }
                 else
                 {
@@ -48,17 +50,6 @@ namespace ZlabGrade.Pages.Student
             {
                 MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-    }
-
-    public class Subject(string name, string teachers)
-    {
-        public string name = name;
-        public string teachers = teachers;
-
-        public override string ToString()
-        {
-            return $"{name}\n{teachers}";
         }
     }
 }
