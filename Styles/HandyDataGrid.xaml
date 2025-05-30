@@ -17,6 +17,17 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="WarningButton"
+           TargetType="Button"
+           BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="#d12424"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#f03a3a" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="Button">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Background" Value="Purple" />
@@ -27,7 +38,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid ClipToBounds="True">
-                        <Border Background="Purple" CornerRadius="8" />
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8" />
                         <Ellipse
                             x:Name="Ripple"
                             Width="{TemplateBinding Width}"
