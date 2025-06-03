@@ -22,7 +22,7 @@ namespace ZlabGrade.Pages.Management
             {
                 await mySqlConnection.OpenAsync();
 
-                string sqlQuery = $"SELECT * FROM Credentials";
+                string sqlQuery = "SELECT * FROM Credentials";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
 
                 using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
@@ -106,8 +106,11 @@ namespace ZlabGrade.Pages.Management
                     {
                         await mySqlConnection.OpenAsync();
 
-                        string sqlQuery = $"DELETE FROM Credentials WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
+                        string sqlQuery = "DELETE FROM Credentials WHERE id_uzivatele = @userID";
                         MySqlCommand command = new(sqlQuery, mySqlConnection);
+
+                        command.Parameters.AddWithValue("@userID", userList[UserDataGrid.SelectedIndex].UserID);
+
                         await command.ExecuteNonQueryAsync();
 
                         userList.RemoveAt(UserDataGrid.SelectedIndex);
@@ -158,11 +161,11 @@ namespace ZlabGrade.Pages.Management
                     {
                         if (string.IsNullOrWhiteSpace(PasswordBox.Password))
                         {
-                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
+                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, role = @role, trida = @classroom WHERE id_uzivatele = @userID";
                         }
                         else
                         {
-                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
+                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = @userID";
                         }
                     }
 
@@ -174,6 +177,7 @@ namespace ZlabGrade.Pages.Management
                     command.Parameters.AddWithValue("@password", Database.GetSha256Hash(PasswordBox.Password));
                     command.Parameters.AddWithValue("@role", RoleComboBox.Text);
                     command.Parameters.AddWithValue("@classroom", ClassroomTextBox.Text);
+                    command.Parameters.AddWithValue("@userID", userList[UserDataGrid.SelectedIndex].UserID);
 
                     await command.ExecuteNonQueryAsync();
 

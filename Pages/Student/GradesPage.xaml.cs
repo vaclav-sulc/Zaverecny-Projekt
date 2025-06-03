@@ -21,7 +21,7 @@ namespace ZlabGrade
             {
                 await mySqlConnection.OpenAsync();
 
-                string sqlQuery = $"SELECT predmet FROM Grades";
+                string sqlQuery = "SELECT predmet FROM Grades";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
 
                 using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
@@ -55,12 +55,11 @@ namespace ZlabGrade
             {
                 await mySqlConnection.OpenAsync();
 
-                string sqlQuery = @"SELECT popis, datum, znamka, vaha FROM Grades WHERE predmet = @predmet AND id_zaka = @userID";
-
+                string sqlQuery = "SELECT popis, datum, znamka, vaha FROM Grades WHERE predmet = @predmet AND id_zaka = @userID";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
+
                 command.Parameters.AddWithValue("@predmet", PredmetyComboBox.SelectedItem.ToString());
                 command.Parameters.AddWithValue("@userID", LoginWindow.userID);
-
 
                 using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
