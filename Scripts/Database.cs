@@ -5,7 +5,7 @@ namespace ZlabGrade.Scripts
 {
     static class Database
     {
-        public const string loginString = "server=sql7.freesqldatabase.com;user=sql7781252;password=ZdVzchgtJ7;database=sql7781252;charset=utf8mb4;";
+        public const string loginString = "server=sqlskola.cps4c6aqi9mb.eu-central-1.rds.amazonaws.com;user=admin;password=adamSkola1#;database=ŽlabGrade;charset=utf8mb4;";
 
         public static string GetSha256Hash(string text)
         {

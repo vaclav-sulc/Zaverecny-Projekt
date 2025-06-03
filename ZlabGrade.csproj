@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Logo.png" />
     <Resource Include="Images\ŽlabGrade - Logo Mini.png" />
     <Resource Include="Images\ŽlabGrade - Logo.png" />
     <Resource Include="Styles\HandyDataGrid.xaml" />
