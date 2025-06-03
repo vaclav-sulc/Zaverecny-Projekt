@@ -6,6 +6,10 @@
 **Username:** sql7781252<br/>
 **Password:** ZdVzchgtJ7
 
+**Novy Server:** sqlskola.cps4c6aqi9mb.eu-central-1.rds.amazonaws.com<br/>
+**Username:** admin<br/>
+**Password:** adamSkola1#
+
 ## Uživatelé
 | Username | Heslo |
 | --- | --- |
