@@ -48,5 +48,6 @@
                     Header="Datum" />
             </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="txtAvg" IsReadOnly="True" HorizontalAlignment="Left" Margin="5,8,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="111"/>
     </Grid>
 </Page>
