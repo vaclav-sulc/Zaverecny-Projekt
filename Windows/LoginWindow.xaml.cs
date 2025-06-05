@@ -24,9 +24,12 @@ namespace ZlabGrade
             {
                 await mySqlConnection.OpenAsync();
 
-                string sqlQuery = $"SELECT * FROM Credentials WHERE login = \"{LoginTextBox.Text.ToLower()}\" AND heslo = \"{Database.GetSha256Hash(PasswordBox.Password)}\"";
+                string sqlQuery = "SELECT * FROM Credentials WHERE login = @login AND heslo = @password";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
-                
+
+                command.Parameters.AddWithValue("@login", LoginTextBox.Text.ToLower());
+                command.Parameters.AddWithValue("@password", Database.GetSha256Hash(PasswordBox.Password));
+
                 using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
                 {

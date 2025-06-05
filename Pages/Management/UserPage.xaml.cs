@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using MySqlConnector;
 using ZlabGrade.Scripts;
@@ -12,17 +13,17 @@ namespace ZlabGrade.Pages.Management
             InitializeComponent();
         }
 
-        readonly List<User> userList = [];
+        readonly BindingList<User> userList = [];
         private bool creatingNewUser = false;
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object? sender, RoutedEventArgs? e)
         {
             using MySqlConnection mySqlConnection = new(Database.loginString);
             try
             {
                 await mySqlConnection.OpenAsync();
 
-                string sqlQuery = $"SELECT * FROM Credentials";
+                string sqlQuery = "SELECT * FROM Credentials";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
 
                 using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
@@ -106,13 +107,16 @@ namespace ZlabGrade.Pages.Management
                     {
                         await mySqlConnection.OpenAsync();
 
-                        string sqlQuery = $"DELETE FROM Credentials WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
+                        string sqlQuery = "DELETE FROM Credentials WHERE id_uzivatele = @userID";
                         MySqlCommand command = new(sqlQuery, mySqlConnection);
+
+                        command.Parameters.AddWithValue("@userID", userList[UserDataGrid.SelectedIndex].UserID);
+
                         await command.ExecuteNonQueryAsync();
 
-                        userList.RemoveAt(UserDataGrid.SelectedIndex);
-
                         mySqlConnection.Close();
+
+                        Page_Loaded(null, null);
                     }
                     catch (Exception exception)
                     {
@@ -158,11 +162,11 @@ namespace ZlabGrade.Pages.Management
                     {
                         if (string.IsNullOrWhiteSpace(PasswordBox.Password))
                         {
-                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
+                            sqlQuery = "UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, role = @role, trida = @classroom WHERE id_uzivatele = @userID";
                         }
                         else
                         {
-                            sqlQuery = $"UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = {userList[UserDataGrid.SelectedIndex].UserID}";
+                            sqlQuery = "UPDATE Credentials SET jmeno = @name, prijmeni = @surname, login = @login, heslo = @password, role = @role, trida = @classroom WHERE id_uzivatele = @userID";
                         }
                     }
 
@@ -174,6 +178,11 @@ namespace ZlabGrade.Pages.Management
                     command.Parameters.AddWithValue("@password", Database.GetSha256Hash(PasswordBox.Password));
                     command.Parameters.AddWithValue("@role", RoleComboBox.Text);
                     command.Parameters.AddWithValue("@classroom", ClassroomTextBox.Text);
+
+                    if (!creatingNewUser)
+                    {
+                        command.Parameters.AddWithValue("@userID", userList[UserDataGrid.SelectedIndex].UserID);
+                    }
 
                     await command.ExecuteNonQueryAsync();
 
@@ -187,15 +196,15 @@ namespace ZlabGrade.Pages.Management
                     }
 
                     mySqlConnection.Close();
+
+                    UserTextBoxes.Visibility = Visibility.Hidden;
+                    UserDataGrid.Visibility = Visibility.Visible;
+                    Page_Loaded(null, null);
                 }
                 catch (Exception exception)
                 {
                     MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-                Page_Loaded(null, null);
-                UserTextBoxes.Visibility = Visibility.Hidden;
-                UserDataGrid.Visibility = Visibility.Visible;
             }
             else
             {

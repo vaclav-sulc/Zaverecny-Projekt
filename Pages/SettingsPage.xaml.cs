@@ -21,10 +21,11 @@ namespace ZlabGrade.Pages
                 {
                     await mySqlConnection.OpenAsync();
 
-                    string sqlQuery = $"UPDATE Credentials SET heslo = @password WHERE id_uzivatele = {LoginWindow.userID}";
+                    string sqlQuery = "UPDATE Credentials SET heslo = @password WHERE id_uzivatele = @userID";
                     MySqlCommand command = new(sqlQuery, mySqlConnection);
 
                     command.Parameters.AddWithValue("@password", Database.GetSha256Hash(NewPasswordBox.Password));
+                    command.Parameters.AddWithValue("@userID", LoginWindow.userID);
 
                     await command.ExecuteNonQueryAsync();
 

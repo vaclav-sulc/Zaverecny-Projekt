@@ -19,8 +19,10 @@ namespace ZlabGrade.Pages.Student
             {
                 await mySqlConnection.OpenAsync();
 
-                string sqlQuery = $"SELECT * FROM Subjects WHERE trida = \"{LoginWindow.classroom}\"";
+                string sqlQuery = "SELECT * FROM Subjects WHERE trida = @classroom";
                 MySqlCommand command = new(sqlQuery, mySqlConnection);
+
+                command.Parameters.AddWithValue("@classroom", LoginWindow.classroom);
 
                 using MySqlDataReader dataReader = await command.ExecuteReaderAsync();
                 if (dataReader.HasRows)
