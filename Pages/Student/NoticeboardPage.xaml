@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ZlabGrade.Pages.Student"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d"
       d:DesignHeight="370" d:DesignWidth="666"
       Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
@@ -15,5 +16,20 @@
         <TextBlock x:Name="HeaderTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,25,25,0" VerticalAlignment="Top" Foreground="White" FontSize="30" FontWeight="Bold" FontFamily="Calibri" Width="350" Height="35"/>
         <TextBlock x:Name="AuthorTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,60,25,0" VerticalAlignment="Top" Foreground="Gray" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Width="350" Height="25"/>
         <TextBlock x:Name="MessageTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,100,25,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Calibri" Width="350" Height="275"/>
+
+        <StackPanel x:Name="ManagementButtons">
+            <Button x:Name="NewMessageButton" Content="Nová" Margin="285,320,0,0" VerticalAlignment="Top" Width="110" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="NewMessageButton_Click"/>
+            <Button x:Name="EditMessageButton" Content="Upravit" Margin="410,-35,0,0" VerticalAlignment="Top" Width="110" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="EditMessageButton_Click"/>
+            <Button x:Name="DeleteMessageButton" Content="Smazat" Margin="535,-35,0,0" VerticalAlignment="Top" Width="110" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="DeleteMessageButton_Click"/>
+        </StackPanel>
+
+        <StackPanel x:Name="MessageManagement" Visibility="Hidden">
+            <hc:TextBox x:Name="HeaderTextBox" HorizontalAlignment="Left" Margin="125,40,0,0" hc:InfoElement.Placeholder="Nadpis" MaxLength="255" TextWrapping="Wrap" Width="425" Height="35" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
+            <hc:TextBox x:Name="MessageTextBox" HorizontalAlignment="Left" Margin="125,4,0,0" hc:InfoElement.Placeholder="Zpráva" MaxLength="255" TextWrapping="Wrap" Width="425" Height="105" FontSize="18" FontFamily="Calibri" BorderThickness="0"/>
+
+            <Label x:Name="WarningLabel" Content="Všechny údaje musí být vyplněné!" Visibility="Hidden" HorizontalAlignment="Center" Margin="-15,15,0,0" VerticalAlignment="Top" Height="30" FontSize="14" FontWeight="Bold" Background="#d12424" Foreground="White" BorderThickness="0"/>
+
+            <Button x:Name="SaveButton" Content="Uložit" Margin="225,15,0,0" Width="200" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="SaveButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

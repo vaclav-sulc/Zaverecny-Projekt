@@ -14,6 +14,7 @@ namespace ZlabGrade
 
         public static string name = string.Empty;
         public static string surname = string.Empty;
+        public static string role = string.Empty;
         public static string classroom = string.Empty;
         public static int userID;
 
@@ -40,6 +41,7 @@ namespace ZlabGrade
 
                     name = dataReader["jmeno"].ToString();
                     surname = dataReader["prijmeni"].ToString();
+                    role = dataReader["role"].ToString();
                     userID = Convert.ToInt32(dataReader["id_uzivatele"]);
 
                     switch (dataReader["role"])
