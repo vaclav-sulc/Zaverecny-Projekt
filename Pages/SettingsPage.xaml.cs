@@ -14,29 +14,37 @@ namespace ZlabGrade.Pages
 
         private async void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NewPasswordBox.Password == ConfirmNewPasswordBox.Password && !string.IsNullOrEmpty(NewPasswordBox.Password))
+            if (NewPasswordBox.Password == ConfirmNewPasswordBox.Password)
             {
-                using MySqlConnection mySqlConnection = new(Database.loginString);
-                try
+                if (!string.IsNullOrEmpty(NewPasswordBox.Password) && !string.IsNullOrEmpty(ConfirmNewPasswordBox.Password))
                 {
-                    await mySqlConnection.OpenAsync();
+                    using MySqlConnection mySqlConnection = new(Database.loginString);
+                    try
+                    {
+                        await mySqlConnection.OpenAsync();
 
-                    string sqlQuery = "UPDATE Credentials SET heslo = @password WHERE id_uzivatele = @userID";
-                    MySqlCommand command = new(sqlQuery, mySqlConnection);
+                        string sqlQuery = "UPDATE Credentials SET heslo = @password WHERE id_uzivatele = @userID";
+                        MySqlCommand command = new(sqlQuery, mySqlConnection);
 
-                    command.Parameters.AddWithValue("@password", Database.GetSha256Hash(NewPasswordBox.Password));
-                    command.Parameters.AddWithValue("@userID", LoginWindow.userID);
+                        command.Parameters.AddWithValue("@password", Database.GetSha256Hash(NewPasswordBox.Password));
+                        command.Parameters.AddWithValue("@userID", LoginWindow.userID);
 
-                    await command.ExecuteNonQueryAsync();
+                        await command.ExecuteNonQueryAsync();
 
-                    WarningLabel.Visibility = Visibility.Hidden;
-                    MessageBox.Show("Heslo bylo úspěšně změněno", "Změna hesla", MessageBoxButton.OK, MessageBoxImage.Information);
+                        WarningLabel.Visibility = Visibility.Hidden;
+                        MessageBox.Show("Heslo bylo úspěšně změněno", "Změna hesla", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    mySqlConnection.Close();
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                        mySqlConnection.Close();
+
+                        NewPasswordBox.ShowPassword = false;
+                        ConfirmNewPasswordBox.ShowPassword = false;
+                        NewPasswordBox.Password = string.Empty;
+                        ConfirmNewPasswordBox.Password = string.Empty;
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else

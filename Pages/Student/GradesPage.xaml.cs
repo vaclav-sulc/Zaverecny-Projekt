@@ -91,6 +91,7 @@ namespace ZlabGrade
                         }
                         catch
                         {
+
                         }
                     }
                 }
@@ -100,21 +101,15 @@ namespace ZlabGrade
                 }
                 mySqlConnection.Close();
 
-                
                 if (soucetVah > 0)
                 {
                     double vazenyPrumer = soucetVazenychZnamek / soucetVah;
-                    txtAvg.Text = vazenyPrumer.ToString("F2");
-                }
-                else
-                {
-                    txtAvg.Text = "N/A";
+                    SubjectAverageTextBlock.Text = $"Průměr: {vazenyPrumer:F2}";
                 }
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
-                txtAvg.Text = "Chyba";
             }
         }
     }
