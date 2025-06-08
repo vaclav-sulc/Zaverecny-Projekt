@@ -14,8 +14,8 @@
         <ListBox x:Name="MessageList" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="10,10,400,10" Background="Transparent" BorderThickness="0" SelectionChanged="MessageList_SelectionChanged"/>
 
         <TextBlock x:Name="HeaderTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,25,25,0" VerticalAlignment="Top" Foreground="White" FontSize="30" FontWeight="Bold" FontFamily="Calibri" Width="350" Height="35"/>
-        <TextBlock x:Name="AuthorTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,60,25,0" VerticalAlignment="Top" Foreground="Gray" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Width="350" Height="25"/>
-        <TextBlock x:Name="MessageTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,100,25,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Calibri" Width="350" Height="275"/>
+        <TextBlock x:Name="AuthorTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,60,25,0" VerticalAlignment="Top" Foreground="Gray" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Width="350" Height="50"/>
+        <TextBlock x:Name="MessageTextBlock" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,120,25,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Calibri" Width="350" Height="190"/>
 
         <StackPanel x:Name="ManagementButtons">
             <Button x:Name="NewMessageButton" Content="Nová" Margin="285,320,0,0" VerticalAlignment="Top" Width="110" Height="35" FontSize="20" FontWeight="Bold" FontFamily="Calibri" Background="Purple" Foreground="White" BorderThickness="0" HorizontalAlignment="Left" Click="NewMessageButton_Click"/>
