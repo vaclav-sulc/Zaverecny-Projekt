@@ -15,18 +15,30 @@ namespace ZlabGrade.Pages.Student
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(LoginWindow.classroom))
+            {
+                NactiRozvrhAsync(LoginWindow.name + " " + LoginWindow.surname);
+            }
             NactiRozvrhAsync(LoginWindow.classroom);
         }
 
         public ObservableCollection<HodinaRozvrhu> Hodiny { get; set; } = new ObservableCollection<HodinaRozvrhu>();
-        public async void NactiRozvrhAsync(string trida)
+        public async void NactiRozvrhAsync(string param)
         {
-            string sql = "SELECT ZkratkaDne, Hodina, ZkratkaPredmetu, ZkratkaUcitele, Mistnost FROM Schedules WHERE Trida = @trida";
+            string sql;
+            if (string.IsNullOrEmpty(LoginWindow.classroom))
+            {
+                sql = "SELECT ZkratkaDne, Hodina, ZkratkaPredmetu, ZkratkaUcitele, Mistnost FROM Schedules WHERE Ucitel = @param";
+            }
+            else
+            {
+                sql = "SELECT ZkratkaDne, Hodina, ZkratkaPredmetu, ZkratkaUcitele, Mistnost FROM Schedules WHERE Trida = @param";
+            }
             using MySqlConnection mySqlConnection = new(Database.loginString);
             using var command = new MySqlCommand(sql, mySqlConnection);
             var rozvrhDict = new Dictionary<(string, int), HodinaRozvrhu>();
 
-            command.Parameters.AddWithValue("@trida", trida);
+            command.Parameters.AddWithValue("@param", param);
             try
             {
                 await mySqlConnection.OpenAsync();
