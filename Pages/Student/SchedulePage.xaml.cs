@@ -16,10 +16,9 @@ namespace ZlabGrade.Pages.Student
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(LoginWindow.classroom))
-            {
                 NactiRozvrhAsync(LoginWindow.name + " " + LoginWindow.surname);
-            }
-            NactiRozvrhAsync(LoginWindow.classroom);
+            else
+                NactiRozvrhAsync(LoginWindow.classroom);
         }
 
         public ObservableCollection<HodinaRozvrhu> Hodiny { get; set; } = new ObservableCollection<HodinaRozvrhu>();
