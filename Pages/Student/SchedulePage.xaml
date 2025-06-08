@@ -1,27 +1,31 @@
-﻿<Page x:Class="ZlabGrade.Pages.Student.SchedulePage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ZlabGrade.Pages.Student"
-      mc:Ignorable="d" 
-      d:DesignHeight="370" d:DesignWidth="666"
-      Title="ŽlabGrade" Background="Transparent" Loaded="Page_Loaded">
+﻿<Page
+    x:Class="ZlabGrade.Pages.Student.SchedulePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ZlabGrade.Pages.Student"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ŽlabGrade"
+    d:DesignHeight="370"
+    d:DesignWidth="666"
+    Background="Transparent"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
     <Page.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Calibri"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Foreground" Value="#fff"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Calibri" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Foreground" Value="#fff" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="Transparent" />
         </Style>
     </Page.Resources>
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -34,73 +38,151 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Border Grid.ColumnSpan="10" Grid.Row="0" Grid.Column="1" Background="Purple"/>
-        <Border Grid.RowSpan="5" Grid.Column="0" Grid.Row="1" Background="Purple"/>
+        <Border
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="10"
+            Background="Purple" />
+        <Border
+            Grid.Row="1"
+            Grid.RowSpan="5"
+            Grid.Column="0"
+            Background="Purple" />
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="po"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="út"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="st"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="čt"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="pá"/>
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="po" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="út" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="st" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="čt" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="pá" />
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="1"/>
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="2"/>
-        <TextBlock Grid.Row="0" Grid.Column="3" Text="3"/>
-        <TextBlock Grid.Row="0" Grid.Column="4" Text="4"/>
-        <TextBlock Grid.Row="0" Grid.Column="5" Text="5" />
-        <TextBlock Grid.Row="0" Grid.Column="6" Text="6" />
-        <TextBlock Grid.Row="0" Grid.Column="7" Text="7" />
-        <TextBlock Grid.Row="0" Grid.Column="8" Text="8" />
-        <TextBlock Grid.Row="0" Grid.Column="9" Text="9" />
-        <TextBlock Grid.Row="0" Grid.Column="10" Text="10" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="1" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="2" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="3"
+            Text="3" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="4"
+            Text="4" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="5"
+            Text="5" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="6"
+            Text="6" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="7"
+            Text="7" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="8"
+            Text="8" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="9"
+            Text="9" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="10"
+            Text="10" />
 
-        <ItemsControl Grid.Row="1" Grid.Column="1"
-              Grid.RowSpan="5" Grid.ColumnSpan="10" ItemsSource="{Binding Hodiny}">
+        <ItemsControl
+            Grid.Row="1"
+            Grid.RowSpan="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="10"
+            ItemsSource="{Binding Hodiny}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Rows="5" Columns="10"/>
+                    <UniformGrid Columns="10" Rows="5" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Background="#222222" BorderThickness="1" BorderBrush="#636363" Padding="2">
+                    <Border
+                        Padding="2"
+                        Background="#222222"
+                        BorderBrush="#636363"
+                        BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.27*"/>
-                                <RowDefinition Height="0.45*"/>
-                                <RowDefinition Height="0.28*"/>
+                                <RowDefinition Height="0.27*" />
+                                <RowDefinition Height="0.45*" />
+                                <RowDefinition Height="0.28*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Viewbox Stretch="Uniform" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                <TextBlock Text="{Binding Mistnost}" 
+                            <Viewbox
+                                Grid.Row="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Stretch="Uniform">
+                                <TextBlock
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Top"
                                     Foreground="White"
-                                    />      
+                                    Text="{Binding Mistnost}" />
                             </Viewbox>
-                            <Viewbox Stretch="Uniform" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Predmet}"
-HorizontalAlignment="Center"
-VerticalAlignment="Center"
-                                           FontWeight="SemiBold"
-Foreground="White"/>
+                            <Viewbox
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Stretch="Uniform">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="{Binding Predmet}" />
                             </Viewbox>
-                            <Viewbox Stretch="Uniform" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <TextBlock Text="{Binding Ucitel}" 
-HorizontalAlignment="Center"
-VerticalAlignment="Bottom"
-Foreground="#AAAAAA"/>
+                            <Viewbox
+                                Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Stretch="Uniform">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Foreground="#AAAAAA"
+                                    Text="{Binding Ucitel}" />
                             </Viewbox>
                         </Grid>
                     </Border>
