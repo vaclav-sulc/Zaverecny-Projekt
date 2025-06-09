@@ -155,6 +155,8 @@ namespace ZlabGrade
 
         private void EditGradeButton_Click(object sender, RoutedEventArgs e)
         {
+            if (PredmetyComboBox.SelectedItem == null) return;
+
             Znamky.Visibility = Visibility.Hidden;
             PredmetyComboBox.Visibility = Visibility.Hidden;
             SubjectAverageTextBlock.Visibility = Visibility.Hidden;
