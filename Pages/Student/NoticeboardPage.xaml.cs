@@ -44,7 +44,7 @@ namespace ZlabGrade.Pages.Student
 
                     while (await dataReader.ReadAsync())
                     {
-                        NoticeboardMessage noticeboardMessage = new(Convert.ToInt32(dataReader["id_zpravy"]), dataReader["nadpis"].ToString(), dataReader["zprava"].ToString(), dataReader["autor"].ToString());
+                        NoticeboardMessage noticeboardMessage = new(Convert.ToInt32(dataReader["id_zpravy"]), dataReader["nadpis"].ToString(), dataReader["zprava"].ToString(), dataReader["autor"].ToString(), dataReader.GetDateTime("datum").ToString());
                         noticeboardMessages.Add(noticeboardMessage);
                     }
 
@@ -68,7 +68,7 @@ namespace ZlabGrade.Pages.Student
             if (MessageList.SelectedItem != null)
             {
                 HeaderTextBlock.Text = noticeboardMessages[MessageList.SelectedIndex].Header;
-                AuthorTextBlock.Text = $"Autor: {noticeboardMessages[MessageList.SelectedIndex].Author}";
+                AuthorTextBlock.Text = $"Autor: {noticeboardMessages[MessageList.SelectedIndex].Author}\nVytvořeno: {noticeboardMessages[MessageList.SelectedIndex].DateTime}";
                 MessageTextBlock.Text = noticeboardMessages[MessageList.SelectedIndex].Message;
             }
         }
@@ -153,11 +153,11 @@ namespace ZlabGrade.Pages.Student
 
                     if (creatingNewMessage)
                     {
-                        sqlQuery = "INSERT INTO Noticeboard (nadpis, zprava, autor) VALUES (@header, @message, @author)";
+                        sqlQuery = "INSERT INTO Noticeboard (nadpis, zprava, autor, datum) VALUES (@header, @message, @author, @dateTime)";
                     }
                     else
                     {
-                        sqlQuery = "UPDATE Noticeboard SET nadpis = @header, zprava = @message, autor = @author WHERE id_zpravy = @messageID";
+                        sqlQuery = "UPDATE Noticeboard SET nadpis = @header, zprava = @message, autor = @author, datum = @dateTime WHERE id_zpravy = @messageID";
                     }
 
                     MySqlCommand command = new(sqlQuery, mySqlConnection);
@@ -165,6 +165,7 @@ namespace ZlabGrade.Pages.Student
                     command.Parameters.AddWithValue("@header", HeaderTextBox.Text);
                     command.Parameters.AddWithValue("@message", MessageTextBox.Text);
                     command.Parameters.AddWithValue("@author", $"{LoginWindow.name} {LoginWindow.surname}");
+                    command.Parameters.AddWithValue("@dateTime", DateTime.Now);
 
                     if (!creatingNewMessage)
                     {
@@ -208,12 +209,13 @@ namespace ZlabGrade.Pages.Student
         }
     }
 
-    public class NoticeboardMessage(int messageID, string header, string message, string author)
+    public class NoticeboardMessage(int messageID, string header, string message, string author, string dateTime)
     {
         public int MessageID { get; set; } = messageID;
         public string Header { get; set; } = header;
         public string Message { get; set; } = message;
         public string Author { get; set; } = author;
+        public string DateTime { get; set; } = dateTime;
 
         public override string ToString()
         {

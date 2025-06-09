@@ -48,6 +48,7 @@
                     Header="Datum" />
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="txtAvg" IsReadOnly="True" HorizontalAlignment="Left" Margin="5,8,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="111"/>
+
+        <TextBlock x:Name="SubjectAverageTextBlock" HorizontalAlignment="Right" Margin="5,4,0,0" TextWrapping="Wrap" Foreground="White" FontSize="18" FontWeight="Bold" FontFamily="Calibri" VerticalAlignment="Top" Height="30" Width="110"/>
     </Grid>
 </Page>
