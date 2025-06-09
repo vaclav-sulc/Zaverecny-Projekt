@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using ZlabGrade.Pages;
 using ZlabGrade.Pages.Student;
+using ZlabGrade.Pages.Teacher;
 
 namespace ZlabGrade
 {
@@ -61,6 +62,11 @@ namespace ZlabGrade
         private void Close_Click(object sender, RoutedEventArgs e)
             => Close();
         private void GradesButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new GradingPage());
+        }
+
+        private void ChangeToGradesPage()
         {
             ContentFrame.Navigate(new GradesPage());
         }
