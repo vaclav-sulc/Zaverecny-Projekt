@@ -16,7 +16,7 @@ namespace ZlabGrade.Pages.Teacher
         readonly BindingList<Student> studentList = [];
         public static int studentUserID;
 
-        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             studentList.Clear();
 
@@ -69,6 +69,11 @@ namespace ZlabGrade.Pages.Teacher
             {
                 MessageBox.Show(exception.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Page_Loaded(null, null);
         }
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)
