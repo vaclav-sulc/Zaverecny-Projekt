@@ -8,5 +8,5 @@
 ## To-Do
 - Nahradit MessageBoxy prostými info labely
 - Přesunout tlačítka na boku na horní lištu a upravit velikosti každé page
-
-©2025 Vytvořeno čtyřmi největšími goaty z Úžlabiny - Adam Goatbauer, Matyáš Gurtavec, Fartin Mraněk, Šáclav Vulc
+<br/>
+> ©2025 Vytvořeno čtyřmi největšími goaty z Úžlabiny - Adam Goatbauer, Matyáš Gurtavec, Fartin Mraněk, Šáclav Vulc
