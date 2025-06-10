@@ -297,7 +297,7 @@ ALTER TABLE `Subjects`
 -- AUTO_INCREMENT pro tabulku `Credentials`
 --
 ALTER TABLE `Credentials`
-  MODIFY `id_uzivatele` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_uzivatele` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pro tabulku `Grades`
 --
@@ -307,7 +307,7 @@ ALTER TABLE `Grades`
 -- AUTO_INCREMENT pro tabulku `Noticeboard`
 --
 ALTER TABLE `Noticeboard`
-  MODIFY `id_zpravy` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_zpravy` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pro tabulku `Schedules`
 --
