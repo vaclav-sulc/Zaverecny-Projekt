@@ -104,7 +104,7 @@ namespace ZlabGrade
                 {
                     while (await dataReader.ReadAsync())
                     {
-                        Grade grade = new(Convert.ToInt32(dataReader["id_znamky"]), Convert.ToInt32(dataReader["id_zaka"]), dataReader["predmet"].ToString(), Convert.ToInt32(dataReader["znamka"]), Convert.ToInt32(dataReader["vaha"]), dataReader["popis"].ToString(), dataReader.GetDateTime("datum").ToString());
+                        Grade grade = new(Convert.ToInt32(dataReader["id_znamky"]), Convert.ToInt32(dataReader["id_zaka"]), dataReader["predmet"].ToString(), Convert.ToInt32(dataReader["znamka"]), Convert.ToInt32(dataReader["vaha"]), dataReader["popis"].ToString(), dataReader.GetDateTime("datum"));
                         gradesList.Add(grade);
 
                         //vypocet prumeru
@@ -273,7 +273,7 @@ namespace ZlabGrade
         }
     }
 
-    public class Grade(int gradeID, int studentUserID, string subject, int mark, int weight, string description, string date)
+    public class Grade(int gradeID, int studentUserID, string subject, int mark, int weight, string description, DateTime date)
     {
         public int GradeID { get; set; } = gradeID;
         public int StudentUserID { get; set; } = studentUserID;
@@ -281,6 +281,6 @@ namespace ZlabGrade
         public int Mark { get; set; } = mark;
         public int Weight { get; set; } = weight;
         public string Description { get; set; } = description;
-        public string Date { get; set; } = date;
+        public DateTime Date { get; set; } = date;
     }
 }
