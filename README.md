@@ -9,4 +9,4 @@
 - Nahradit MessageBoxy prostými info labely
 - Přesunout tlačítka na boku na horní lištu a upravit velikosti každé page
 <br/>
-> ©2025 Vytvořeno čtyřmi největšími goaty z Úžlabiny - Adam Goatbauer, Matyáš Gurtavec, Fartin Mraněk, Šáclav Vulc
+©2025 Vytvořeno čtyřmi největšími goaty z Úžlabiny - Adam Goatbauer, Matyáš Gurtavec, Fartin Mraněk, Šáclav Vulc
