@@ -7,6 +7,7 @@
 - Školní WiFi síť blokuje spojení s databází
 ## To-Do
 - Nahradit MessageBoxy prostými info labely
-- Přesunout tlačítka na boku na horní lištu a upravit velikosti každé page
-<br/>
-©2025 Vytvořeno čtyřmi největšími goaty z Úžlabiny - Adam Goatbauer, Matyáš Gurtavec, Fartin Mraněk, Šáclav Vulc
+- Přesunout tlačítka na boku na horní lištu a upravit velikosti každé page<br/>
+
+**©2025 ŽlabGrade - Vytvořeno čtyřmi největšími goaty z Úžlabiny<br/>
+Adam Goatbauer, Matyáš Gurtavec, Fartin Mraněk, Šáclav Vulc**
